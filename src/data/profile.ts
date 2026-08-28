@@ -21,7 +21,7 @@ My journey in tech is driven by curiosity and a desire to understand real-world 
 My interests sit at the intersection of Statistics, Artificial Intelligence, Data, Software Development, UI/UX, Geospatial Technology, and IoT.`,
   location: "Gombe State, Nigeria",
   available: true,
-  profileImage: "/images/profile/jungudo-profile.png",
+  profileImage: "/images/profile/jungudo-profile.jpg",
   cv: "/documents/Jungudo-Muhammad-Tukur-CV.pdf",
   cvAvailable: false, // Set to true when CV PDF is uploaded
   currently: [
