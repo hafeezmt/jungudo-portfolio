@@ -1,70 +1,67 @@
-// Profile Data
+// Profile Data - Updated from official CV
 export const profile = {
   name: "Jungudo Muhammad Tukur",
   shortName: "Jungudo",
   initials: "JMT",
-  tagline: "Building with Data, AI & Technology. Solving Real Problems.",
-  headline: "Turning Data & Ideas Into Real-World Solutions.",
-  subheadline: "Building technology that solves real problems.",
+  tagline: "UI/UX Designer • Product Manager • Tech Entrepreneur",
+  headline: "Building AI-Powered & Community-Focused Products for Africa.",
+  subheadline: "Translating complex social challenges into accessible, human-centred digital solutions.",
   roles: [
-    "Statistics Student",
-    "AI & Data Enthusiast",
+    "UI/UX Designer",
+    "Product Manager",
+    "Tech Entrepreneur",
     "Software Developer",
-    "UI/UX Learner",
-    "Technology Innovator",
+    "Statistics Student",
   ],
-  bio: "I'm a Statistics student and technology enthusiast passionate about artificial intelligence, data, software development, and digital innovation. I enjoy turning real-world problems into practical technology solutions that can make people's lives easier.",
-  bioExtended: `I am a Statistics student at Gombe State University with a strong interest in technology and practical problem-solving. I'm also studying Computer Science at the University of the People.
+  bio: "Entrepreneurial UI/UX designer and product lead with hands-on experience designing, building, and managing AI-powered digital products for African communities. Founder of WizzyAI, co-founder of AgriSense IoT, and lead designer for PropaBridge.",
+  bioExtended: `I am an entrepreneurial UI/UX designer, product lead, and tech entrepreneur based in Gombe State, Nigeria. Currently pursuing a Bachelor of Science in Computer Science at the University of the People (UoPeople) and studying Statistics at Gombe State University.
 
-My journey in tech is driven by curiosity and a desire to understand real-world problems — not just build software for the sake of it. I believe in a simple approach: Learn → Build → Test → Improve → Create Impact.
+My passion lies in translating complex social challenges into accessible, human-centred digital solutions that function reliably — even in low-connectivity environments across Africa.
 
-My interests sit at the intersection of Statistics, Artificial Intelligence, Data, Software Development, UI/UX, Geospatial Technology, and IoT.`,
+I am the Founder & Product Lead of WizzyAI (an AI learning companion for African children aged 5–15), Co-Founder & Operations Lead of AgriSense IoT (an offline-first farm monitoring startup selected for iHatch Cohort 5), and Lead UI/UX Designer for PropaBridge (a VC-backed verified real estate marketplace).`,
   location: "Gombe State, Nigeria",
   available: true,
   profileImage: "/images/profile/jungudo-profile.jpg",
   cv: "/documents/Jungudo-Muhammad-Tukur-CV.pdf",
-  cvAvailable: false, // Set to true when CV PDF is uploaded
+  cvAvailable: true, // Activated with official CV!
   currently: [
+    "Building WizzyAI (AI Learning Companion for kids 5-15)",
+    "Lead UI/UX Designer at PropaBridge (Real Estate Marketplace)",
+    "Co-Founding AgriSense IoT (Selected for iHatch Cohort 5 Accelerator)",
+    "Studying Computer Science at University of the People (UoPeople)",
     "Studying Statistics at Gombe State University",
-    "Studying Computer Science at University of the People",
-    "Learning and building with Python",
-    "Exploring AI and Data Science",
-    "Developing technology projects",
-    "Exploring UI/UX design",
-    "Learning software development",
-    "Exploring geospatial technologies",
-    "Working on startup and innovation ideas",
+    "Operating KBS Creation (Gift & Décor Business)",
   ],
   journey: [
     {
-      stage: "Statistics",
+      stage: "KBS Creation",
       description:
-        "Developing a foundation in statistics, quantitative thinking, probability, data analysis, and problem solving.",
-      icon: "📊",
+        "Founded and operating a gift & décor business in Gombe State, managing end-to-end operations, sourcing, marketing, and client fulfillment.",
+      icon: "🎁",
     },
     {
-      stage: "Technology",
+      stage: "Computer Science & Statistics",
       description:
-        "Expanding into programming, software development, UI/UX, and digital tools.",
-      icon: "💻",
+        "Pursuing Computer Science at UoPeople and Statistics at GSU — building foundations in software development, data structures, and quantitative systems thinking.",
+      icon: "🎓",
     },
     {
-      stage: "Artificial Intelligence",
+      stage: "PropaBridge",
       description:
-        "Exploring AI-powered applications and practical use cases.",
+        "Led full product rebrand for verified real estate marketplace serving Abuja, Kaduna, and Minna. Designed Realtor Affiliate Programme UX, Framer CMS components, and GitHub PR workflows.",
+      icon: "🏢",
+    },
+    {
+      stage: "AgriSense IoT",
+      description:
+        "Co-founded offline-first farm monitoring startup for Northern Nigeria using SMS/siren alerts. Selected for the competitive iHatch Cohort 5 incubation programme.",
+      icon: "🌾",
+    },
+    {
+      stage: "WizzyAI",
+      description:
+        "Conceived, designed, and built an AI-powered learning companion for African children integrating 6 adaptive learning modes using React, Supabase, and Claude (Anthropic) API.",
       icon: "🤖",
-    },
-    {
-      stage: "Innovation",
-      description:
-        "Building technology concepts focused on agriculture, healthcare, waste management, property technology, and other real-world problems.",
-      icon: "💡",
-    },
-    {
-      stage: "Entrepreneurship",
-      description:
-        "Exploring how technology products can become sustainable businesses.",
-      icon: "🚀",
     },
   ],
 };

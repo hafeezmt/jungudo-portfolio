@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { education } from "@/data/education";
+import { achievements } from "@/data/achievements";
+import { Award } from "lucide-react";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -51,7 +53,7 @@ export function About() {
             ))}
 
             {/* Approach */}
-            <div className="mt-8 p-6 bg-white/3 border border-white/6 rounded-2xl">
+            <div className="mt-8 p-6 bg-white/[0.025] border border-white/6 rounded-2xl">
               <p className="text-xs font-mono text-white/30 tracking-widest mb-4 uppercase">My Approach</p>
               <div className="flex flex-wrap gap-3 items-center">
                 {["Learn", "Build", "Test", "Improve", "Create Impact"].map((step, i, arr) => (
@@ -75,7 +77,7 @@ export function About() {
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="bg-white/3 border border-white/6 rounded-2xl p-7"
+            className="bg-white/[0.025] border border-white/6 rounded-2xl p-7"
           >
             <div className="flex items-center gap-2.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -92,37 +94,79 @@ export function About() {
           </motion.div>
         </div>
 
-        {/* Education */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-6">Education</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {education.map((edu) => (
-              <div
-                key={edu.institution}
-                className="group p-6 bg-white/3 border border-white/6 rounded-2xl hover:border-white/10 transition-colors"
-              >
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <h4 className="font-semibold text-white text-base">{edu.institution}</h4>
-                    <p className="text-sm text-white/50 mt-1">{edu.field}</p>
+        {/* Education & Achievements */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          {/* Education */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeUp}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-6">Education</p>
+            <div className="space-y-4">
+              {education.map((edu) => (
+                <div
+                  key={edu.institution}
+                  className="group p-6 bg-white/[0.025] border border-white/6 rounded-2xl hover:border-white/10 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-2">
+                    <div>
+                      <h4 className="font-semibold text-white text-base">{edu.institution}</h4>
+                      <p className="text-sm text-blue-400/90 font-medium mt-0.5">{edu.degree} — {edu.field}</p>
+                    </div>
+                    <span className="shrink-0 px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 text-xs font-medium border border-green-500/15">
+                      {edu.status}
+                    </span>
                   </div>
-                  <span className="shrink-0 px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 text-xs font-medium border border-green-500/15">
-                    {edu.status}
-                  </span>
+                  {edu.description && (
+                    <p className="text-sm text-white/40 leading-relaxed mb-3">{edu.description}</p>
+                  )}
+                  {edu.coursework && (
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
+                      {edu.coursework.map((c) => (
+                        <span key={c} className="px-2 py-0.5 bg-white/5 text-white/40 text-[11px] rounded">
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                {edu.description && (
-                  <p className="text-sm text-white/40 leading-relaxed">{edu.description}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Achievements & Recognition */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeUp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-6">Achievements &amp; Recognition</p>
+            <div className="space-y-4">
+              {achievements.map((ach) => (
+                <div
+                  key={ach.title}
+                  className="p-6 bg-blue-500/[0.04] border border-blue-500/12 rounded-2xl hover:border-blue-500/25 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-2">
+                      <Award size={16} className="text-blue-400 shrink-0" />
+                      <h4 className="font-semibold text-white text-base">{ach.title}</h4>
+                    </div>
+                    {ach.year && (
+                      <span className="shrink-0 text-xs font-mono text-blue-400/70">{ach.year}</span>
+                    )}
+                  </div>
+                  <p className="text-sm text-white/50 leading-relaxed">{ach.description}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
         {/* Journey */}
         <motion.div
@@ -131,7 +175,6 @@ export function About() {
           viewport={{ once: true, margin: "-60px" }}
           variants={fadeUp}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20"
         >
           <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-8">My Journey</p>
           <div className="relative">

@@ -1,4 +1,4 @@
-// Experience Data
+// Experience Data - Updated from official CV
 
 export type ExperienceItem = {
   title: string;
@@ -8,49 +8,64 @@ export type ExperienceItem = {
   period: string;
   description: string;
   technologies?: string[];
+  highlights?: string[];
 };
 
 export const experience: ExperienceItem[] = [
   {
-    title: "Frontend Developer & UI/UX Designer",
-    company: "PropaBridge",
+    title: "Founder & Product Lead",
+    company: "WizzyAI",
+    category: "Professional • Startup",
+    period: "April 2026 – Present",
+    description:
+      "Conceived, built, and launched WizzyAI — an AI-powered learning companion for African children aged 5–15. Integrated six adaptive learning modes: Chat, Homework Help, Stories, Quiz, Curiosity, and Creative Writing.",
+    technologies: ["React", "Supabase", "Claude API (Anthropic)", "UI/UX Design", "Lovable", "v0", "Windsurf"],
+    highlights: [
+      "Architected a freemium model targeting Nigerian school children.",
+      "Designed brand identity, UX flows, and frontend interface; created full business plan and pitch materials for hackathons and incubators.",
+      "Delivered a working prototype under resource constraints using AI-assisted no-code and low-code tools.",
+    ],
+  },
+  {
+    title: "Lead UI/UX Designer",
+    company: "PropaBridge (Zippatek)",
     companyUrl: "https://propabridge.com",
     category: "Professional",
-    period: "Present",
+    period: "2025 – Present",
     description:
-      "Contributing to PropaBridge — a Nigerian PropTech (property technology) platform that is building a verification-first real estate marketplace. PropaBridge verifies every property listing through physical inspection and title document review, solving trust and transparency problems in Nigeria's real estate market. Responsibilities include building responsive frontend interfaces and designing user-centered UI/UX experiences for the platform.",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "UI/UX Design", "Frontend Development"],
+      "Led full product rebrand for PropaBridge — a verified property listings marketplace serving Abuja, Kaduna, and Minna.",
+    technologies: ["Framer", "Figma", "UI/UX Design", "Framer CMS", "HTML/CSS", "GitHub", "QA Testing"],
+    highlights: [
+      "Redesigned navigation architecture, landing copy, and listing card components.",
+      "Designed and delivered email HTML template, 'Verified' listing badge, and Realtor Affiliate Programme UX in Framer CMS.",
+      "Produced formal QA documentation, managed GitHub PRs, and coordinated frontend tasks across cross-functional team.",
+      "Conducted UX audits and contributed to digital strategy and partner onboarding.",
+    ],
   },
   {
-    title: "AI & Data Science Exploration",
-    category: "Technology & AI",
-    period: "Ongoing",
+    title: "Co-Founder & Operations Lead",
+    company: "AgriSense IoT",
+    category: "Professional • Startup",
+    period: "2025 – Present",
     description:
-      "Actively learning and experimenting with machine learning concepts, data analysis using Python (NumPy, Pandas, Matplotlib), and exploring generative AI applications through personal projects.",
-    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Generative AI"],
+      "Co-founded an environmental monitoring startup for poultry and livestock farms in Northern Nigeria, designed to operate offline-first via SMS and siren alerts — no smartphone required.",
+    technologies: ["IoT Systems", "Offline-First Design", "SMS Alerts", "Startup Operations", "Go-To-Market"],
+    highlights: [
+      "Selected for the competitive iHatch Cohort 5 incubation programme.",
+      "Developed MVP roadmap, pitch deck, team structure, and demo video materials.",
+      "Led operations, programme submissions, stakeholder communications, and website build strategy.",
+    ],
   },
   {
-    title: "Software & Web Development",
-    category: "Technology & AI",
-    period: "Ongoing",
+    title: "Founder",
+    company: "KBS Creation",
+    category: "Entrepreneurship",
+    period: "2023 – Present",
     description:
-      "Building responsive web applications and interactive UIs using React, Next.js, TypeScript, and Tailwind CSS as part of personal learning and project development.",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript"],
-  },
-  {
-    title: "Geospatial & GIS Practice",
-    category: "Geospatial",
-    period: "Ongoing",
-    description:
-      "Working with QGIS to process and visualize spatial data, exploring property mapping concepts, and learning how location-based technology can solve real-world problems.",
-    technologies: ["QGIS", "GIS", "Spatial Data", "Mapping"],
-  },
-  {
-    title: "AgriTech Concept Development",
-    category: "Innovation",
-    period: "Ongoing",
-    description:
-      "Designing and prototyping IoT-based agricultural monitoring solutions, including NomaVault AI and AgriSense IoT, to address post-harvest losses and livestock monitoring challenges.",
-    technologies: ["ESP32", "IoT Sensors", "GSM", "Data Analysis"],
+      "Founded and operate a gift and décor business serving individual and corporate clients in Gombe State, Nigeria.",
+    technologies: ["Product Sourcing", "Customer Engagement", "Social Media Marketing", "Order Fulfilment"],
+    highlights: [
+      "Manage end-to-end operations including sourcing, marketing, and client order fulfillment.",
+    ],
   },
 ];

@@ -1,29 +1,34 @@
-// Education Data
+// Education Data - Updated from official CV
 
 export type Education = {
   institution: string;
   degree: string;
   field: string;
-  status: string; // e.g. "Currently Enrolled"
-  logo?: string;
+  period: string;
+  status: string;
   description?: string;
+  coursework?: string[];
 };
 
 export const education: Education[] = [
   {
-    institution: "Gombe State University",
-    degree: "Bachelor's Degree",
-    field: "Statistics",
-    status: "Currently Enrolled",
+    institution: "University of the People (UoPeople)",
+    degree: "Bachelor of Science",
+    field: "Computer Science",
+    period: "2024 – Present",
+    status: "Currently Enrolled (Online)",
     description:
-      "Developing a strong foundation in statistics, probability, data analysis, quantitative thinking, and mathematical problem solving.",
+      "Studying software development, systems thinking, computer science fundamentals, and data structures.",
+    coursework: ["Programming Fundamentals", "Introduction to Computer Science", "Systems Thinking", "Data Structures"],
   },
   {
-    institution: "University of the People",
-    degree: "Associate Degree",
-    field: "Computer Science",
+    institution: "Gombe State University",
+    degree: "Bachelor of Science",
+    field: "Statistics",
+    period: "Currently Enrolled",
     status: "Currently Enrolled",
     description:
-      "Expanding technical knowledge in computer science, programming, software development, and computational thinking.",
+      "Developing strong quantitative foundations in statistical methodology, probability theory, data analysis, and mathematical problem solving.",
+    coursework: ["Statistical Inference", "Probability Theory", "Data Analysis", "Applied Statistics"],
   },
 ];
