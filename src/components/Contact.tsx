@@ -67,14 +67,20 @@ export function Contact() {
     e.preventDefault();
     setStatus("loading");
 
-    // ─────────────────────────────────────────────────────────────
-    // BACKEND NOT CONNECTED
-    // To connect: replace this block with your email service call
-    // Options: Resend, EmailJS, Formspree, or your own API route.
-    // ─────────────────────────────────────────────────────────────
-    await new Promise((res) => setTimeout(res, 1200));
-    setStatus("success");
-    // setStatus("error"); // Uncomment to test error state
+    try {
+      await new Promise((res) => setTimeout(res, 600));
+
+      const subject = encodeURIComponent(form.subject || `Inquiry from ${form.name}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      );
+
+      // Open mail client directly
+      window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const canSubmit = form.name && form.email && form.message && status !== "loading";
@@ -158,9 +164,9 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="p-5 bg-amber-500/5 border border-amber-500/15 rounded-2xl">
-              <p className="text-xs text-amber-400/80 leading-relaxed">
-                <strong className="font-semibold">Note:</strong> The contact form is currently a UI demo. Messages are not delivered until a backend service is connected.
+            <div className="p-5 bg-blue-500/[0.04] border border-blue-500/12 rounded-2xl">
+              <p className="text-xs text-blue-300/80 leading-relaxed">
+                <strong className="font-semibold text-white">Direct Email:</strong> You can also send an email directly to <a href={`mailto:${socialLinks.email}`} className="underline text-blue-400 hover:text-blue-300">{socialLinks.email}</a> for inquiries, project ideas, or collaborations.
               </p>
             </div>
           </motion.div>
@@ -174,19 +180,19 @@ export function Contact() {
             className="lg:col-span-3"
           >
             {status === "success" ? (
-              <div className="h-full min-h-[400px] flex flex-col items-center justify-center gap-5 text-center p-10 bg-white/[0.025] border border-white/6 rounded-2xl">
+              <div className="h-full min-h-[380px] flex flex-col items-center justify-center gap-5 text-center p-10 bg-white/[0.025] border border-white/6 rounded-2xl">
                 <CheckCircle size={48} className="text-green-400" />
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Form submitted (Demo)</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">Opening Email Client...</h3>
                   <p className="text-white/40 text-sm max-w-xs">
-                    This is a frontend demo. Connect a backend service to enable real email delivery.
+                    Your message has been formatted and opened in your email app to send directly to {socialLinks.email}.
                   </p>
                 </div>
                 <button
                   onClick={() => { setStatus("idle"); setForm(INITIAL_FORM); }}
                   className="px-5 py-2 bg-white/8 border border-white/10 text-white text-sm rounded-full hover:bg-white/15 transition-colors"
                 >
-                  Send another
+                  Send another message
                 </button>
               </div>
             ) : (
@@ -235,7 +241,7 @@ export function Contact() {
                   )}
                 >
                   {status === "loading" ? (
-                    <><Loader2 size={15} className="animate-spin" /> Sending...</>
+                    <><Loader2 size={15} className="animate-spin" /> Preparing Email...</>
                   ) : (
                     <><Send size={15} /> Send Message</>
                   )}
