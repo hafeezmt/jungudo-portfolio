@@ -39,28 +39,28 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-[#050505]/85 backdrop-blur-2xl border-b border-white/[0.06] py-3"
+            ? "bg-[#050505]/90 backdrop-blur-2xl border-b border-white/[0.06] py-3"
             : "bg-transparent py-5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6">
 
-          {/* Logo */}
+          {/* Logo — Full Name */}
           <Link
             href="#home"
-            className="shrink-0 font-bold text-lg tracking-tight text-white hover:text-blue-400 transition-colors"
+            className="shrink-0 font-bold tracking-tight text-white hover:text-blue-400 transition-colors text-sm lg:text-base"
             aria-label="Jungudo Muhammad Tukur — Home"
           >
-            JMT<span className="text-blue-500">.</span>
+            JUNGUDO MUHAMMAD TUKUR<span className="text-blue-500">.</span>
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 text-sm text-white/50 hover:text-white rounded-lg hover:bg-white/5 transition-all"
+                className="text-sm text-white/50 hover:text-white transition-colors"
               >
                 {link.name}
               </Link>
@@ -70,14 +70,14 @@ export function Navbar() {
           {/* Desktop CTA */}
           <Link
             href="#contact"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-full transition-all hover:scale-[1.03] active:scale-[0.97] shadow-lg shadow-blue-600/20"
+            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-full transition-all hover:scale-[1.03] active:scale-[0.97] shadow-lg shadow-blue-600/20 shrink-0"
           >
             Let&apos;s Build Together
           </Link>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden w-9 h-9 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/8 rounded-lg transition-all"
+            className="md:hidden w-9 h-9 flex items-center justify-center text-white/60 hover:text-white transition-all"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
@@ -93,7 +93,7 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.22, ease: "easeInOut" }}
+              transition={{ duration: 0.22 }}
               className="md:hidden overflow-hidden bg-[#080810]/95 backdrop-blur-2xl border-b border-white/[0.06]"
             >
               <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-1">
@@ -121,7 +121,6 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-
       <div className="h-[4.5rem]" aria-hidden="true" />
     </>
   );

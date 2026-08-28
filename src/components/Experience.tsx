@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { experience } from "@/data/experience";
+import { ExternalLink } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,6 +14,7 @@ export function Experience() {
     <section id="experience" className="py-24 lg:py-32 relative" aria-label="Experience section">
       <div className="absolute inset-0 bg-white/[0.01]" aria-hidden="true" />
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
+
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -27,19 +29,18 @@ export function Experience() {
             Experience &amp; Learning
           </h2>
           <p className="mt-4 text-white/40 text-base max-w-xl">
-            Only verified experience is listed here — personal projects, ongoing learning, and hands-on exploration.
+            Verified experience, ongoing learning, and hands-on exploration.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
           <div
             className="hidden md:block absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"
             aria-hidden="true"
           />
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {experience.map((item, i) => (
               <motion.div
                 key={i}
@@ -47,20 +48,48 @@ export function Experience() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-40px" }}
                 variants={fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="flex gap-8"
               >
                 {/* Dot */}
-                <div className="hidden md:flex shrink-0 w-10 h-10 items-center justify-center mt-1">
-                  <div className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.6)]" />
+                <div className="hidden md:flex shrink-0 w-10 items-start justify-center pt-6">
+                  <div className={`w-2.5 h-2.5 rounded-full shadow-lg ${
+                    item.category === "Professional"
+                      ? "bg-blue-400 shadow-blue-400/50"
+                      : "bg-white/30"
+                  }`} />
                 </div>
 
                 {/* Card */}
-                <div className="flex-1 p-6 bg-white/[0.025] border border-white/6 rounded-2xl hover:border-white/10 transition-colors">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                <div className={`flex-1 p-6 rounded-2xl border transition-colors ${
+                  item.category === "Professional"
+                    ? "bg-blue-500/[0.06] border-blue-500/15 hover:border-blue-500/25"
+                    : "bg-white/[0.025] border-white/6 hover:border-white/10"
+                }`}>
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
                     <div>
-                      <h3 className="font-bold text-white text-base">{item.title}</h3>
-                      <p className="text-xs text-white/30 mt-0.5 font-mono">{item.category}</p>
+                      <h3 className="font-bold text-white text-base leading-snug">{item.title}</h3>
+                      {item.company && (
+                        <div className="flex items-center gap-1.5 mt-1.5">
+                          {item.companyUrl ? (
+                            <a
+                              href={item.companyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                            >
+                              {item.company} <ExternalLink size={11} />
+                            </a>
+                          ) : (
+                            <span className="text-sm text-blue-400 font-medium">{item.company}</span>
+                          )}
+                          <span className="text-white/20 text-xs">·</span>
+                          <span className="text-xs text-white/30 font-mono">{item.category}</span>
+                        </div>
+                      )}
+                      {!item.company && (
+                        <p className="text-xs text-white/30 mt-0.5 font-mono">{item.category}</p>
+                      )}
                     </div>
                     <span className="shrink-0 px-3 py-1 bg-white/5 border border-white/8 rounded-full text-xs text-white/40 font-mono">
                       {item.period}
@@ -72,10 +101,7 @@ export function Experience() {
                   {item.technologies && item.technologies.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {item.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2.5 py-0.5 bg-blue-500/8 border border-blue-500/12 text-blue-300/70 text-xs rounded"
-                        >
+                        <span key={tech} className="px-2.5 py-0.5 bg-blue-500/8 border border-blue-500/12 text-blue-300/70 text-xs rounded">
                           {tech}
                         </span>
                       ))}
