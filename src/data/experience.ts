@@ -2,15 +2,25 @@
 
 export type ExperienceItem = {
   title: string;
+  company?: string;
+  companyUrl?: string;
   category: string;
   period: string;
   description: string;
   technologies?: string[];
 };
 
-// Only verified experience is listed here.
-// Add real experience items as they become available.
 export const experience: ExperienceItem[] = [
+  {
+    title: "Frontend Developer & UI/UX Designer",
+    company: "PropaBridge",
+    companyUrl: "https://propabridge.com",
+    category: "Professional",
+    period: "Present",
+    description:
+      "Contributing to PropaBridge — a Nigerian PropTech (property technology) platform that is building a verification-first real estate marketplace. PropaBridge verifies every property listing through physical inspection and title document review, solving trust and transparency problems in Nigeria's real estate market. Responsibilities include building responsive frontend interfaces and designing user-centered UI/UX experiences for the platform.",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "UI/UX Design", "Frontend Development"],
+  },
   {
     title: "AI & Data Science Exploration",
     category: "Technology & AI",
