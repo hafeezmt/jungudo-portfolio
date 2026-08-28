@@ -42,7 +42,7 @@ function DataNode({
 }
 
 export function Hero() {
-  const hasProfileImage = false; // Set to true once profile image is added
+  const hasProfileImage = true; // Profile image active
 
   return (
     <section
@@ -160,17 +160,17 @@ export function Hero() {
               {/* Glow */}
               <div className="absolute -inset-4 bg-blue-500/10 rounded-3xl blur-2xl" />
               {/* Frame */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/8 shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden border border-white/8 shadow-2xl bg-[#0d0d14]">
                 <Image
                   src={profile.profileImage}
                   alt={`${profile.name} — Profile Photo`}
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                   sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 380px"
                 />
-                {/* Subtle overlay gradient at bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
+                {/* Bottom fade */}
+                <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0d0d14]/80 to-transparent" />
               </div>
               {/* Floating badge */}
               <motion.div
