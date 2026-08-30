@@ -1,4 +1,4 @@
-// Projects Data - Updated from official CV
+// Projects Data - Updated with Tilawa Daily
 
 export type ProjectStatus = "Built" | "Prototype" | "Concept" | "In Development";
 
@@ -20,6 +20,32 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    id: "tilawa-daily",
+    title: "Tilawa Daily",
+    category: "WebRTC • Real-Time • EdTech",
+    tags: ["WebRTC", "EdTech", "Social Impact"],
+    status: "Built",
+    shortDescription:
+      "A real-time WebRTC audio room platform and 5-Hizb daily schedule app for virtual Quran recitation Halaqahs.",
+    description:
+      "Tilawa Daily is a community platform designed for live Quran recitation sessions. It features WebRTC voice rooms, a real-time reciter queue, interactive Mushaf reading, and a structured 5-Hizb daily reading schedule.",
+    problem:
+      "Coordinating live daily Quran recitation groups virtually across distances requires synchronized schedules, low-latency voice rooms, and structured recitation queues.",
+    solution:
+      "Built an interactive WebRTC voice room platform featuring a real-time recitation queue, live audio spectrum visualizer, Mushaf reader, and automated 5-Hizb daily reading schedule.",
+    technologies: [
+      "Next.js",
+      "WebRTC",
+      "React",
+      "Tailwind CSS",
+      "Real-Time Sync",
+      "Vercel",
+    ],
+    image: "/images/projects/tilawa-daily.png",
+    liveDemo: "https://tilawa-daily.vercel.app",
+    featured: true,
+  },
   {
     id: "wizzyai",
     title: "WizzyAI",

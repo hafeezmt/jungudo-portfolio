@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { projects, type Project, type ProjectStatus } from "@/data/projects";
 import { FaGithub } from "react-icons/fa";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const ALL_FILTERS = ["All", "AgriTech", "AI", "IoT", "Healthcare", "CleanTech", "PropTech", "Geospatial", "Computer Vision"] as const;
+const ALL_FILTERS = ["All", "WebRTC", "AI", "EdTech", "AgriTech", "IoT", "PropTech", "Social Impact", "CleanTech", "Geospatial"] as const;
 
 const statusColors: Record<ProjectStatus, string> = {
   Built: "bg-green-500/15 text-green-400 border-green-500/20",
@@ -27,11 +28,23 @@ function ProjectCard({ project }: { project: Project }) {
       className="group flex flex-col bg-white/[0.025] border border-white/6 rounded-2xl overflow-hidden hover:border-white/10 transition-all"
     >
       {/* Visual header */}
-      <div className="relative h-40 bg-gradient-to-br from-white/3 to-transparent border-b border-white/5 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-        <span className="font-mono text-xs text-white/15 tracking-[0.3em] uppercase z-10 select-none">
-          {project.category}
-        </span>
+      <div className="relative h-44 bg-gradient-to-br from-white/3 to-transparent border-b border-white/5 flex items-center justify-center overflow-hidden">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={`${project.title} Screenshot`}
+            fill
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <span className="font-mono text-xs text-white/15 tracking-[0.3em] uppercase z-10 select-none">
+              {project.category}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Content */}
@@ -107,10 +120,10 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.liveDemo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-medium transition-colors"
             >
               <ExternalLink size={12} />
-              <span>Live</span>
+              <span>Live Demo</span>
             </a>
           )}
         </div>
@@ -144,7 +157,7 @@ export function Projects() {
                 Featured Projects
               </h2>
               <p className="mt-3 text-white/40 text-base max-w-xl">
-                Concepts, prototypes, and in-progress builds. All projects are clearly labelled by status.
+                Real-world web applications, AI tools, IoT systems, and UI/UX projects. All projects are clearly labelled by status.
               </p>
             </div>
             <a
