@@ -4,11 +4,19 @@ import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { education } from "@/data/education";
 import { achievements } from "@/data/achievements";
-import { Award } from "lucide-react";
+import { Award, GraduationCap, Compass, ArrowUpRight } from "lucide-react";
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionHeader({ title, subtitle, number }: { title: string; subtitle?: string; number: string }) {
   return (
-    <p className="text-xs font-mono tracking-widest text-blue-400 uppercase mb-2">{children}</p>
+    <div className="mb-12">
+      <p className="text-xs font-mono tracking-widest text-blue-400 uppercase mb-2">
+        {number} — {title}
+      </p>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+        {title}
+      </h2>
+      {subtitle && <p className="mt-3 text-slate-400 text-base max-w-xl">{subtitle}</p>}
+    </div>
   );
 }
 
@@ -20,113 +28,129 @@ const fadeUp = {
 export function About() {
   return (
     <section id="about" className="py-24 lg:py-32 relative" aria-label="About section">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        
+        {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={fadeUp}
           transition={{ duration: 0.6 }}
-          className="mb-16"
         >
-          <SectionLabel>01 — About</SectionLabel>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-            About Me
-          </h2>
+          <SectionHeader number="01" title="About Me" subtitle="My philosophy, educational background, and journey as a tech entrepreneur." />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-20">
-          {/* Bio */}
+        {/* ── Main Bio & Currently Bento Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+          
+          {/* Extended Bio (8 cols) */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-2 space-y-5"
+            className="lg:col-span-8 bento-card p-7 sm:p-9 rounded-3xl space-y-5"
           >
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <Compass size={20} className="text-blue-400" />
+              Human-Centred &amp; Impact-Driven
+            </h3>
+
             {profile.bioExtended.split("\n\n").map((para, i) => (
-              <p key={i} className="text-base md:text-lg text-white/60 leading-relaxed">
+              <p key={i} className="text-base text-slate-300 leading-relaxed">
                 {para}
               </p>
             ))}
 
-            {/* Approach */}
-            <div className="mt-8 p-6 bg-white/[0.025] border border-white/6 rounded-2xl">
-              <p className="text-xs font-mono text-white/30 tracking-widest mb-4 uppercase">My Approach</p>
-              <div className="flex flex-wrap gap-3 items-center">
-                {["Learn", "Build", "Test", "Improve", "Create Impact"].map((step, i, arr) => (
-                  <div key={step} className="flex items-center gap-3">
-                    <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-300 text-sm font-medium">
+            {/* Approach Pills */}
+            <div className="pt-4 border-t border-white/8">
+              <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Product Development Lifecycle</p>
+              <div className="flex flex-wrap items-center gap-2">
+                {["Learn User Needs", "Prototype Fast", "Test Offline/Online", "Iterate UI/UX", "Create Impact"].map((step, i, arr) => (
+                  <div key={step} className="flex items-center gap-2">
+                    <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold rounded-lg">
                       {step}
                     </span>
-                    {i < arr.length - 1 && (
-                      <span className="text-white/20 text-sm">→</span>
-                    )}
+                    {i < arr.length - 1 && <span className="text-slate-600 text-xs">→</span>}
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Currently Card */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={fadeUp}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="bg-white/[0.025] border border-white/6 rounded-2xl p-7"
-          >
-            <div className="flex items-center gap-2.5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <h3 className="text-base font-semibold text-white">Currently</h3>
-            </div>
-            <ul className="space-y-3.5">
-              {profile.currently.map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-white/50">
-                  <span className="text-blue-400 mt-0.5 shrink-0">▹</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-
-        {/* Education & Achievements */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Education */}
+          {/* Currently Card (4 cols) */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-4 bento-card p-7 sm:p-9 rounded-3xl flex flex-col justify-between"
           >
-            <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-6">Education</p>
-            <div className="space-y-4">
+            <div>
+              <div className="flex items-center gap-2.5 mb-6">
+                <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
+                <h3 className="text-base font-bold text-white">Currently Focus</h3>
+              </div>
+              <ul className="space-y-3.5">
+                {profile.currently.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                    <span className="text-blue-400 font-mono mt-0.5 shrink-0">▹</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="mt-8 pt-4 border-t border-white/8 flex items-center justify-between text-xs text-slate-400">
+              <span>Gombe State, Nigeria</span>
+              <span className="font-mono text-blue-400">2026</span>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* ── Education & Achievements Bento Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
+
+          {/* Education (6 cols) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeUp}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-6 bento-card p-7 sm:p-9 rounded-3xl space-y-6"
+          >
+            <div className="flex items-center gap-2">
+              <GraduationCap size={22} className="text-blue-400" />
+              <h3 className="text-xl font-bold text-white">Education</h3>
+            </div>
+
+            <div className="space-y-5">
               {education.map((edu) => (
                 <div
                   key={edu.institution}
-                  className="group p-6 bg-white/[0.025] border border-white/6 rounded-2xl hover:border-white/10 transition-colors"
+                  className="p-5 bg-white/[0.02] border border-white/6 rounded-2xl space-y-2 hover:border-white/12 transition-all"
                 >
-                  <div className="flex items-start justify-between gap-4 mb-2">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h4 className="font-semibold text-white text-base">{edu.institution}</h4>
-                      <p className="text-sm text-blue-400/90 font-medium mt-0.5">{edu.degree} — {edu.field}</p>
+                      <h4 className="font-bold text-white text-base">{edu.institution}</h4>
+                      <p className="text-xs text-blue-400 font-medium">{edu.degree} — {edu.field}</p>
                     </div>
-                    <span className="shrink-0 px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 text-xs font-medium border border-green-500/15">
+                    <span className="shrink-0 px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 text-[11px] font-mono border border-green-500/20">
                       {edu.status}
                     </span>
                   </div>
                   {edu.description && (
-                    <p className="text-sm text-white/40 leading-relaxed mb-3">{edu.description}</p>
+                    <p className="text-xs text-slate-400 leading-relaxed">{edu.description}</p>
                   )}
                   {edu.coursework && (
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
+                    <div className="flex flex-wrap gap-1.5 pt-2">
                       {edu.coursework.map((c) => (
-                        <span key={c} className="px-2 py-0.5 bg-white/5 text-white/40 text-[11px] rounded">
+                        <span key={c} className="px-2 py-0.5 bg-white/5 text-slate-400 text-[10px] rounded">
                           {c}
                         </span>
                       ))}
@@ -137,49 +161,52 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Achievements & Recognition */}
+          {/* Achievements & Recognition (6 cols) */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="lg:col-span-6 bento-card p-7 sm:p-9 rounded-3xl space-y-6"
           >
-            <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-6">Achievements &amp; Recognition</p>
+            <div className="flex items-center gap-2">
+              <Award size={22} className="text-purple-400" />
+              <h3 className="text-xl font-bold text-white">Achievements &amp; Milestones</h3>
+            </div>
+
             <div className="space-y-4">
               {achievements.map((ach) => (
                 <div
                   key={ach.title}
-                  className="p-6 bg-blue-500/[0.04] border border-blue-500/12 rounded-2xl hover:border-blue-500/25 transition-colors"
+                  className="p-5 bg-purple-500/[0.03] border border-purple-500/12 rounded-2xl hover:border-purple-500/25 transition-all space-y-1.5"
                 >
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div className="flex items-center gap-2">
-                      <Award size={16} className="text-blue-400 shrink-0" />
-                      <h4 className="font-semibold text-white text-base">{ach.title}</h4>
-                    </div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h4 className="font-bold text-white text-sm">{ach.title}</h4>
                     {ach.year && (
-                      <span className="shrink-0 text-xs font-mono text-blue-400/70">{ach.year}</span>
+                      <span className="shrink-0 text-xs font-mono text-purple-400">{ach.year}</span>
                     )}
                   </div>
-                  <p className="text-sm text-white/50 leading-relaxed">{ach.description}</p>
+                  <p className="text-xs text-slate-400 leading-relaxed">{ach.description}</p>
                 </div>
               ))}
             </div>
           </motion.div>
+
         </div>
 
-        {/* Journey */}
+        {/* ── Journey Timeline ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={fadeUp}
           transition={{ duration: 0.6, delay: 0.3 }}
+          className="bento-card p-7 sm:p-9 rounded-3xl"
         >
-          <p className="text-xs font-mono tracking-widest text-white/30 uppercase mb-8">My Journey</p>
+          <h3 className="text-xl font-bold text-white mb-8">My Career &amp; Project Journey</h3>
           <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent ml-[19px]" />
+            <div className="hidden md:block absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-transparent" />
             <div className="space-y-8">
               {profile.journey.map((step, i) => (
                 <motion.div
@@ -190,18 +217,19 @@ export function About() {
                   transition={{ delay: i * 0.1 }}
                   className="flex gap-6"
                 >
-                  <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/8 text-lg">
+                  <div className="shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20 text-lg">
                     {step.icon}
                   </div>
                   <div className="pb-2">
-                    <h4 className="font-semibold text-white mb-1.5">{step.stage}</h4>
-                    <p className="text-sm text-white/50 leading-relaxed">{step.description}</p>
+                    <h4 className="font-bold text-white text-base mb-1">{step.stage}</h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );

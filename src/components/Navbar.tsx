@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -18,110 +18,150 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      // Simple active section detector
+      const sections = NAV_LINKS.map((l) => l.href.substring(1));
+      const scrollPos = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setIsOpen(false); };
+    const onResize = () => {
+      if (window.innerWidth >= 768) setIsOpen(false);
+    };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (
     <>
-      <nav
-        role="navigation"
-        aria-label="Main navigation"
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-[#050505]/90 backdrop-blur-2xl border-b border-white/[0.06] py-3"
-            : "bg-transparent py-5"
-        )}
+      <header
+        role="banner"
+        className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6">
-
-          {/* Logo — Full Name */}
+        <nav
+          role="navigation"
+          aria-label="Main navigation"
+          className={cn(
+            "pointer-events-auto flex items-center justify-between w-full max-w-5xl px-4 sm:px-6 py-2.5 rounded-full transition-all duration-500 border",
+            scrolled
+              ? "bg-[#0a0a10]/85 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+              : "bg-[#0d0d14]/70 backdrop-blur-md border-white/8 shadow-xl"
+          )}
+        >
+          {/* Brand Logo */}
           <Link
             href="#home"
-            className="shrink-0 font-bold tracking-tight text-white hover:text-blue-400 transition-colors text-sm lg:text-base"
+            className="flex items-center gap-2 group"
             aria-label="Jungudo Muhammad Tukur — Home"
           >
-            JUNGUDO MUHAMMAD TUKUR<span className="text-blue-500">.</span>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center font-bold text-xs text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] group-hover:scale-105 transition-transform">
+              JT
+            </div>
+            <span className="font-bold tracking-tight text-white text-xs sm:text-sm hidden sm:inline-block group-hover:text-blue-400 transition-colors">
+              JUNGUDO<span className="text-blue-500">.</span>
+            </span>
           </Link>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm text-white/50 hover:text-white transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+          {/* Desktop Navigation Capsule */}
+          <div className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/6 px-3 py-1 rounded-full">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={cn(
+                    "relative px-3.5 py-1.5 text-xs font-medium transition-all rounded-full",
+                    isActive
+                      ? "text-white font-semibold"
+                      : "text-white/50 hover:text-white"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activePill"
+                      className="absolute inset-0 bg-blue-600/25 border border-blue-500/40 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.name}</span>
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Desktop CTA */}
-          <Link
-            href="#contact"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-full transition-all hover:scale-[1.03] active:scale-[0.97] shadow-lg shadow-blue-600/20 shrink-0"
-          >
-            Let&apos;s Build Together
-          </Link>
+          {/* Desktop Right CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="#contact"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-full transition-all hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+            >
+              <Sparkles size={12} />
+              Let&apos;s Build
+            </Link>
+          </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden w-9 h-9 flex items-center justify-center text-white/60 hover:text-white transition-all"
+            className="md:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white bg-white/5 rounded-full transition-all"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
-        </div>
+        </nav>
+      </header>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.22 }}
-              className="md:hidden overflow-hidden bg-[#080810]/95 backdrop-blur-2xl border-b border-white/[0.06]"
-            >
-              <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="px-3 py-3 text-base font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <div className="pt-3 mt-2 border-t border-white/[0.06]">
-                  <Link
-                    href="#contact"
-                    onClick={() => setIsOpen(false)}
-                    className="block w-full text-center py-3.5 bg-blue-600 text-white rounded-full font-semibold text-sm hover:bg-blue-500 transition-colors"
-                  >
-                    Let&apos;s Build Together
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-      <div className="h-[4.5rem]" aria-hidden="true" />
+      {/* Mobile Menu Modal */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-4 top-20 z-40 md:hidden bg-[#0d0d15]/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 shadow-2xl space-y-3"
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="pt-3 border-t border-white/10">
+              <Link
+                href="#contact"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-center py-3 bg-blue-600 text-white rounded-xl font-semibold text-xs hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/30"
+              >
+                Let&apos;s Build Together
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
