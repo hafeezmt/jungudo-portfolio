@@ -31,13 +31,21 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Visual Thumbnail */}
         <div className="relative h-48 bg-[#0b0b12] border-b border-white/8 overflow-hidden flex items-center justify-center">
           {project.image ? (
-            <Image
-              src={project.image}
-              alt={`${project.title} Preview`}
-              fill
-              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+            <>
+              <Image
+                src={project.image}
+                alt={`${project.title} Preview`}
+                fill
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              {project.liveDemo && (
+                <div className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-green-500/30 flex items-center gap-1.5 text-[10px] font-mono text-green-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Live
+                </div>
+              )}
+            </>
           ) : (
             <div className="p-6 text-center">
               <span className="font-mono text-xs text-slate-500 tracking-[0.2em] uppercase">
