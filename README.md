@@ -1,199 +1,111 @@
 # Jungudo Muhammad Tukur — Personal Portfolio
 
-> **Statistics Student · AI & Data Enthusiast · Software Developer · UI/UX Learner · Technology Innovator**
-> Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+> **UI/UX Designer · Product Manager · Tech Entrepreneur · Computer Science & Statistics Student**
+> Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Framer Motion.
 
 ---
 
-## Features
+## ⚡ Features & Enhancements
 
-- ⚡ Next.js 15+ App Router
-- 🎨 Dark-first premium design
-- 🌀 Framer Motion animations (respects `prefers-reduced-motion`)
-- 📱 Fully responsive (mobile, tablet, desktop)
-- ♿ Accessible — semantic HTML, ARIA labels, keyboard navigation
-- 🔍 SEO-ready — Open Graph, Twitter Card metadata
-- 📁 Data-driven architecture — edit content in `src/data/` without touching components
-- 📬 Contact form UI (ready to connect to backend)
-- 🗂️ Filterable projects grid
-- 🖼️ Profile image slot (drop-in ready)
-- 📄 CV download button (activate when PDF is ready)
+- 🍱 **Bento-Grid Architecture**: Modern dark onyx theme (`#070709`) with glowing electric-blue/cyan accents and glassmorphic bento cards.
+- ⚡ **Next.js 16 App Router**: Server and client component optimization with static page pre-rendering.
+- 🌀 **Framer Motion Micro-Interactions**: Smooth spring physics, cycling titles, animated halo rings, and prefers-reduced-motion support.
+- 🔍 **SEO & JSON-LD Structured Data**: Full Person & Organization schema integration for Google search indexing.
+- 📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop viewports.
+- 📂 **Data-Driven Layer**: Content decoupled from UI components in `src/data/`.
+- 🗂️ **Filterable Bento Projects Showcase**: Visual previews for **Tilawa Daily**, **WizzyAI**, **PropaBridge**, and **AgriSense IoT**.
+- 📄 **Downloadable CV**: Generated PDF version integrated directly in the Hero section.
+- 🔝 **ScrollToTop Navigation**: Quick floating return-to-top button.
+- 📬 **Interactive Contact Flow**: Form with instant mailto pre-filling and quick copy-to-clipboard email action.
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
-| Animation | Framer Motion |
+| Motion | Framer Motion |
 | Icons | Lucide React + React Icons |
+| SEO | JSON-LD Schema + Next Metadata |
 | Deployment | Vercel |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 jungudo-portfolio/
 ├── public/
-│   ├── images/profile/          ← Drop profile photo here
-│   └── documents/               ← Drop CV PDF here
+│   ├── documents/
+│   │   └── Jungudo-Muhammad-Tukur-CV.pdf   ← Generated CV PDF
+│   ├── images/
+│   │   ├── profile/                        ← Profile headshot
+│   │   └── projects/                       ← Project screenshots (Tilawa Daily, etc.)
 ├── src/
 │   ├── app/
-│   │   ├── globals.css
-│   │   ├── layout.tsx           ← Metadata, fonts
-│   │   ├── page.tsx             ← Main page
+│   │   ├── globals.css                     ← Bento dark tokens & utility classes
+│   │   ├── layout.tsx                      ← JSON-LD schema & Metadata
+│   │   ├── page.tsx                        ← Main page assembly
 │   │   ├── loading.tsx
 │   │   └── not-found.tsx
 │   ├── components/
-│   │   ├── Navbar.tsx
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Skills.tsx
-│   │   ├── Projects.tsx
-│   │   ├── Experience.tsx
-│   │   ├── BuildingInPublic.tsx
-│   │   ├── Contact.tsx
+│   │   ├── Navbar.tsx                      ← Glassmorphic floating pill navigation
+│   │   ├── Hero.tsx                        ← Bento Spotlight Hero & cycling title
+│   │   ├── About.tsx                       ← Bio, Education (UoPeople & GSU), Achievements
+│   │   ├── Skills.tsx                      ← Capabilities bento matrix with category counts
+│   │   ├── Projects.tsx                    ← Filterable project showcase with thumbnails
+│   │   ├── Experience.tsx                  ← Executive experience cards (PropaBridge, WizzyAI, etc.)
+│   │   ├── BuildingInPublic.tsx            ← Active R&D domains & impact chain
+│   │   ├── Contact.tsx                     ← Contact form & copy-to-clipboard email action
+│   │   ├── ScrollToTop.tsx                 ← Floating return to top button
+│   │   ├── FloatingBubbles.tsx             ← Background ambient canvas particles
 │   │   └── Footer.tsx
-│   ├── data/                    ← Edit content here
-│   │   ├── profile.ts
-│   │   ├── projects.ts
-│   │   ├── skills.ts
-│   │   ├── experience.ts
-│   │   ├── education.ts
-│   │   ├── achievements.ts
-│   │   └── social.ts
+│   ├── data/
+│   │   ├── profile.ts                      ← Bio & journey details
+│   │   ├── projects.ts                     ← Project details & links
+│   │   ├── skills.ts                       ← Capabilities dataset
+│   │   ├── experience.ts                   ← Work experience dataset
+│   │   ├── education.ts                    ← Degrees & coursework
+│   │   ├── achievements.ts                 ← Accelerator & project milestones
+│   │   └── social.ts                       ← Contact & social links
 │   └── lib/
-│       └── utils.ts
+│       ├── siteConfig.ts                   ← Global site metadata helper
+│       └── utils.ts                        ← Tailwind helper
 ```
 
 ---
 
-## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Installation
+## 🚀 Getting Started
 
 ```bash
+# Clone the repository
 git clone https://github.com/hafeezmt/jungudo-portfolio.git
+
+# Navigate into directory
 cd jungudo-portfolio
+
+# Install dependencies
 npm install
-```
 
-### Development
-
-```bash
+# Run development server
 npm run dev
-```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-### Build
-
-```bash
+# Build for production
 npm run build
-npm run start
 ```
 
 ---
 
-## Adding Your Profile Photo
-
-1. Add your photo to `public/images/profile/jungudo-profile.jpg`
-2. Open `src/components/Hero.tsx`
-3. Set `hasProfileImage = true`
-
-**Recommended:** 800×1000px, JPG/WebP, under 500KB.
-
----
-
-## Activating the CV Download
-
-1. Add your CV to `public/documents/Jungudo-Muhammad-Tukur-CV.pdf`
-2. Open `src/data/profile.ts`
-3. Set `cvAvailable: true`
-
----
-
-## Connecting the Contact Form
-
-The contact form UI is fully built. To activate real email delivery:
-
-**Option 1 — Resend (recommended):**
-1. Create an account at [resend.com](https://resend.com)
-2. Create `src/app/api/contact/route.ts`
-3. Add `RESEND_API_KEY` to `.env.local`
-4. Update the form submit handler in `src/components/Contact.tsx`
-
-**Option 2 — Formspree:**
-1. Create a form at [formspree.io](https://formspree.io)
-2. Add `NEXT_PUBLIC_FORMSPREE_ENDPOINT` to `.env.local`
-3. Update the form action
-
----
-
-## Adding New Projects
-
-Edit `src/data/projects.ts` and add a new object to the `projects` array:
-
-```ts
-{
-  id: "my-new-project",
-  title: "My Project",
-  category: "AI • Web",
-  tags: ["AI", "Web"],
-  status: "Concept", // "Built" | "Prototype" | "Concept" | "In Development"
-  shortDescription: "One sentence summary.",
-  description: "Full description.",
-  problem: "What problem does it solve?",
-  solution: "How does it solve it?",
-  technologies: ["Python", "React"],
-  featured: false,
-}
-```
-
----
-
-## Environment Variables
-
-Copy `.env.local.example` to `.env.local`:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Fill in values as needed.
-
----
-
-## Deployment (Vercel)
-
-```bash
-npm install -g vercel
-vercel
-```
-
-Or connect the GitHub repository directly at [vercel.com](https://vercel.com).
-
-Set environment variables in the Vercel dashboard under **Settings → Environment Variables**.
-
----
-
-## Author
+## 👤 Author
 
 **Jungudo Muhammad Tukur**
-Statistics Student · AI & Data · Software · Innovation
-Gombe State, Nigeria
-
-- GitHub: [github.com/hafeezmt](https://github.com/hafeezmt)
-- LinkedIn: [linkedin.com/in/jungudo-muh-d-tukur-b76764422](https://www.linkedin.com/in/jungudo-muh-d-tukur-b76764422/)
-- Email: Jungudomuhammadtukur@gmail.com
+- Email: [jungudo.muhammad@gmail.com](mailto:jungudo.muhammad@gmail.com)
+- GitHub: [@hafeezmt](https://github.com/hafeezmt)
+- LinkedIn: [jungudo-tukur](https://www.linkedin.com/in/jungudo-tukur)
+- Twitter/X: [@Jungudotukur](https://x.com/Jungudotukur)
 
 ---
 
