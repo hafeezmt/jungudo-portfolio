@@ -176,8 +176,9 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="relative w-full max-w-[340px] sm:max-w-[380px]"
             >
-              {/* Outer Glow */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 via-purple-600/20 to-cyan-400/20 rounded-[2rem] blur-2xl opacity-70" />
+              {/* Outer Glow & Animated Ring */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 via-purple-600/20 to-cyan-400/20 rounded-[2rem] blur-2xl opacity-70 animate-pulse" />
+              <div className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-cyan-400/40 blur-sm opacity-50" />
 
               {/* Card Container */}
               <div className="relative bento-card p-4 rounded-[2rem] overflow-hidden border border-white/10 bg-[#0d0d15]/90">
