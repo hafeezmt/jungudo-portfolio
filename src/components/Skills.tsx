@@ -52,11 +52,16 @@ export function Skills() {
               className="bento-card p-7 rounded-3xl flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center">
-                    {categoryIcons[group.category] || <span className="text-xl">{group.icon}</span>}
+                <div className="flex items-center justify-between gap-3 mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center">
+                      {categoryIcons[group.category] || <span className="text-xl">{group.icon}</span>}
+                    </div>
+                    <h3 className="font-bold text-white text-base">{group.category}</h3>
                   </div>
-                  <h3 className="font-bold text-white text-base">{group.category}</h3>
+                  <span className="px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/8 text-[10px] font-mono text-slate-400">
+                    {group.items.length}
+                  </span>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
