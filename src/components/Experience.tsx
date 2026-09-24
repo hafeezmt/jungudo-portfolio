@@ -57,13 +57,13 @@ export function Experience() {
                           href={item.companyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 hover:bg-blue-500/20 hover:text-blue-300 transition-colors"
                         >
                           {item.company}
-                          <ExternalLink size={12} />
+                          <ExternalLink size={11} />
                         </a>
                       ) : (
-                        <span className="text-sm font-semibold text-blue-400">{item.company}</span>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/8 text-xs font-semibold text-slate-300">{item.company}</span>
                       )}
                       <span className="text-slate-600 text-xs">•</span>
                       <span className="text-xs font-mono text-slate-400">{item.category}</span>
