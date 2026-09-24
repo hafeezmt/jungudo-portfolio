@@ -8,6 +8,7 @@ import { BuildingInPublic } from "@/components/BuildingInPublic";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { FloatingBubbles } from "@/components/FloatingBubbles";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
