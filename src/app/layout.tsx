@@ -9,42 +9,79 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Jungudo Muhammad Tukur | AI, Data & Technology",
+  title: "Jungudo Muhammad Tukur | UI/UX Designer & Product Lead",
   description:
-    "Portfolio of Jungudo Muhammad Tukur — Statistics student, AI and data enthusiast, software developer, UI/UX learner, geospatial technology practitioner, and young technology innovator from Nigeria.",
+    "Portfolio of Jungudo Muhammad Tukur — UI/UX Designer, Product Manager, Computer Science & Statistics student, and Tech Entrepreneur from Nigeria.",
   keywords: [
     "Jungudo Muhammad Tukur",
     "Nigeria",
-    "AI",
-    "Data Science",
-    "Statistics",
+    "UI/UX Designer",
+    "Product Manager",
+    "Tech Entrepreneur",
     "Software Developer",
-    "Portfolio",
-    "Gombe",
-    "Technology",
+    "Computer Science",
+    "WizzyAI",
+    "PropaBridge",
+    "AgriSense IoT",
+    "Gombe State",
   ],
   authors: [{ name: "Jungudo Muhammad Tukur" }],
   creator: "Jungudo Muhammad Tukur",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jungudomuhammadtukur.vercel.app",
-    siteName: "Jungudo Muhammad Tukur",
-    title: "Jungudo Muhammad Tukur | AI, Data & Technology",
+    url: "https://jungudo-portfolio.vercel.app",
+    siteName: "Jungudo Muhammad Tukur Portfolio",
+    title: "Jungudo Muhammad Tukur | UI/UX Designer & Product Lead",
     description:
-      "Statistics student, AI and data enthusiast, software developer, UI/UX learner, and technology innovator from Nigeria.",
+      "Entrepreneurial UI/UX designer and product lead building AI-powered digital products for African communities.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jungudo Muhammad Tukur | AI, Data & Technology",
+    title: "Jungudo Muhammad Tukur | UI/UX Designer & Product Lead",
     description:
-      "Statistics student, AI and data enthusiast, software developer, and technology innovator from Nigeria.",
+      "Entrepreneurial UI/UX designer and product lead building AI-powered digital products for African communities.",
     creator: "@Jungudotukur",
   },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jungudo Muhammad Tukur",
+  url: "https://jungudo-portfolio.vercel.app",
+  sameAs: [
+    "https://github.com/hafeezmt",
+    "https://www.linkedin.com/in/jungudo-tukur",
+    "https://x.com/Jungudotukur",
+  ],
+  jobTitle: "UI/UX Designer & Product Lead",
+  worksFor: [
+    {
+      "@type": "Organization",
+      name: "WizzyAI",
+    },
+    {
+      "@type": "Organization",
+      name: "PropaBridge",
+    },
+    {
+      "@type": "Organization",
+      name: "AgriSense IoT",
+    },
+  ],
+  knowsAbout: [
+    "UI/UX Design",
+    "Product Management",
+    "React",
+    "Next.js",
+    "AI Product Development",
+    "IoT Systems",
+  ],
 };
 
 export default function RootLayout({
@@ -54,7 +91,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
-      <body className="antialiased bg-[#050505] text-white min-h-screen">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="antialiased bg-[#070709] text-white min-h-screen">
         {children}
       </body>
     </html>
