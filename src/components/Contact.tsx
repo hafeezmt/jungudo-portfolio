@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, Loader2, CheckCircle, AlertCircle, MessageSquare } from "lucide-react";
+import { Send, Mail, Loader2, CheckCircle, AlertCircle, MessageSquare, Copy, Check } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { socialLinks } from "@/data/social";
 import { cn } from "@/lib/utils";
@@ -58,6 +58,7 @@ function InputField({
 export function Contact() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [copied, setCopied] = useState(false);
 
   const handleChange = useCallback((id: keyof FormState, val: string) => {
     setForm((prev) => ({ ...prev, [id]: val }));
@@ -130,12 +131,26 @@ export function Contact() {
 
               <div>
                 <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Email Address</p>
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="text-sm font-semibold text-blue-400 hover:text-blue-300 break-all transition-colors"
-                >
-                  {socialLinks.email}
-                </a>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={`mailto:${socialLinks.email}`}
+                    className="text-sm font-semibold text-blue-400 hover:text-blue-300 break-all transition-colors"
+                  >
+                    {socialLinks.email}
+                  </a>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(socialLinks.email);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    title="Copy email to clipboard"
+                    className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/8 text-slate-400 hover:text-white transition-all text-xs flex items-center gap-1"
+                  >
+                    {copied ? <Check size={13} className="text-green-400" /> : <Copy size={13} />}
+                    <span className="text-[10px]">{copied ? "Copied" : "Copy"}</span>
+                  </button>
+                </div>
               </div>
 
               <div>
