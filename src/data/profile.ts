@@ -1,67 +1,53 @@
-// Profile Data - Updated from official CV
+// Personal Brand & Profile Data
 export const profile = {
   name: "Jungudo Muhammad Tukur",
   shortName: "Jungudo",
   initials: "JMT",
-  tagline: "UI/UX Designer • Product Manager • Tech Entrepreneur",
-  headline: "Building AI-Powered & Community-Focused Products for Africa.",
-  subheadline: "Translating complex social challenges into accessible, human-centred digital solutions.",
+  headline: "Building Technology That Solves Real-World Problems.",
+  description:
+    "I'm a Nigerian software developer and technology innovator passionate about artificial intelligence, software engineering, and building practical solutions that create meaningful impact.",
   roles: [
-    "UI/UX Designer",
-    "Product Manager",
-    "Tech Entrepreneur",
     "Software Developer",
-    "Statistics Student",
+    "AI Enthusiast",
+    "Technology Innovator",
+    "Computer Science Student",
+    "Startup Builder",
   ],
-  bio: "Entrepreneurial UI/UX designer and product lead with hands-on experience designing, building, and managing AI-powered digital products for African communities. Founder of WizzyAI, co-founder of AgriSense IoT, and lead designer for PropaBridge.",
-  bioExtended: `I am an entrepreneurial UI/UX designer, product lead, and tech entrepreneur based in Gombe State, Nigeria. Currently pursuing a Bachelor of Science in Computer Science at the University of the People (UoPeople) and studying Statistics at Gombe State University.
-
-My passion lies in translating complex social challenges into accessible, human-centred digital solutions that function reliably — even in low-connectivity environments across Africa.
-
-I am the Founder & Product Lead of WizzyAI (an AI learning companion for African children aged 5–15), Co-Founder & Operations Lead of AgriSense IoT (an offline-first farm monitoring startup selected for iHatch Cohort 5), and Lead UI/UX Designer for PropaBridge (a VC-backed verified real estate marketplace).`,
+  bio: "I'm a Nigerian software developer and technology innovator passionate about artificial intelligence, software engineering, and building practical solutions that create meaningful impact. Based in Gombe State, Nigeria, I build accessible digital infrastructure and intelligent tools engineered for real-world constraints.",
+  bioExtended: [
+    "My journey in technology is rooted in a fundamental conviction: software is most powerful when it directly improves human lives and addresses genuine structural problems. Living and building in Nigeria gives me a firsthand understanding of infrastructural realities — where connectivity, affordability, and practical utility dictate whether technology succeeds or fails.",
+    "Currently pursuing a Bachelor of Science in Computer Science at the University of the People alongside Statistics studies at Gombe State University, I combine solid computer science foundations with quantitative and probabilistic thinking. This dual focus allows me to approach problems with algorithmic rigor and data-driven discipline.",
+    "Through hands-on projects, open-source initiatives, and startup ventures like AgriSense IoT (selected for iHatch Cohort 5) and ListingWriter, I actively bridge the gap between emerging artificial intelligence and African grassroots requirements — crafting offline-first architectures, low-latency interfaces, and automated workflows that deliver tangible value.",
+  ],
   location: "Gombe State, Nigeria",
+  country: "Nigeria",
   available: true,
+  availabilityText: "Available for engineering & innovation roles",
   profileImage: "/images/profile/jungudo-profile.jpg",
   cv: "/documents/Jungudo-Muhammad-Tukur-CV.pdf",
-  cvAvailable: true, // Activated with official CV!
-  currently: [
-    "Building WizzyAI (AI Learning Companion for kids 5-15)",
-    "Lead UI/UX Designer at PropaBridge (Real Estate Marketplace)",
-    "Co-Founding AgriSense IoT (Selected for iHatch Cohort 5 Accelerator)",
-    "Studying Computer Science at University of the People (UoPeople)",
-    "Studying Statistics at Gombe State University",
-    "Operating KBS Creation (Gift & Décor Business)",
+  cvAvailable: true,
+  principles: [
+    {
+      title: "Context-Aware Engineering",
+      desc: "Designing systems that thrive within real-world infrastructural constraints — low-bandwidth, offline-first, and high reliability.",
+    },
+    {
+      title: "Practical AI Integration",
+      desc: "Leveraging state-of-the-art LLMs and machine intelligence to automate high-friction workflows rather than building superficial gimmicks.",
+    },
+    {
+      title: "Scalable Architecture",
+      desc: "Writing clean, type-safe, maintainable code with modern frontend and backend standards for durability and growth.",
+    },
+    {
+      title: "Grassroots Impact",
+      desc: "Focusing engineering energy on sectors that matter most across Africa: agriculture, property tech, education, and community tools.",
+    },
   ],
-  journey: [
-    {
-      stage: "KBS Creation",
-      description:
-        "Founded and operating a gift & décor business in Gombe State, managing end-to-end operations, sourcing, marketing, and client fulfillment.",
-      icon: "🎁",
-    },
-    {
-      stage: "Computer Science & Statistics",
-      description:
-        "Pursuing Computer Science at UoPeople and Statistics at GSU — building foundations in software development, data structures, and quantitative systems thinking.",
-      icon: "🎓",
-    },
-    {
-      stage: "PropaBridge",
-      description:
-        "Led full product rebrand for verified real estate marketplace serving Abuja, Kaduna, and Minna. Designed Realtor Affiliate Programme UX, Framer CMS components, and GitHub PR workflows.",
-      icon: "🏢",
-    },
-    {
-      stage: "AgriSense IoT",
-      description:
-        "Co-founded offline-first farm monitoring startup for Northern Nigeria using SMS/siren alerts. Selected for the competitive iHatch Cohort 5 incubation programme.",
-      icon: "🌾",
-    },
-    {
-      stage: "WizzyAI",
-      description:
-        "Conceived, designed, and built an AI-powered learning companion for African children integrating 6 adaptive learning modes using React, Supabase, and Claude (Anthropic) API.",
-      icon: "🤖",
-    },
+  stats: [
+    { label: "Products Built & Designed", value: "5+" },
+    { label: "Accelerator Program", value: "iHatch Cohort 5" },
+    { label: "Open Source Repos", value: "Active" },
+    { label: "Location", value: "Nigeria" },
   ],
 };

@@ -1,11 +1,18 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Send, Mail, Loader2, CheckCircle, AlertCircle, MessageSquare, Copy, Check } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { useState } from "react";
+import { motion, type Variants } from "framer-motion";
+import {
+  Send,
+  Mail,
+  Copy,
+  Check,
+  MapPin,
+  ExternalLink,
+} from "lucide-react";
+import { FaGithub, FaLinkedin, FaDev, FaXTwitter } from "react-icons/fa6";
 import { socialLinks } from "@/data/social";
-import { cn } from "@/lib/utils";
+import { profile } from "@/data/profile";
 
 type FormState = {
   name: string;
@@ -14,77 +21,49 @@ type FormState = {
   message: string;
 };
 
-type SubmitStatus = "idle" | "loading" | "success" | "error";
+const INITIAL_FORM: FormState = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
 
-const INITIAL_FORM: FormState = { name: "", email: "", subject: "", message: "" };
-
-function InputField({
-  label,
-  id,
-  type = "text",
-  value,
-  onChange,
-  required,
-  placeholder,
-}: {
-  label: string;
-  id: keyof FormState;
-  type?: string;
-  value: string;
-  onChange: (id: keyof FormState, val: string) => void;
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-xs font-mono text-slate-300">
-        {label}
-        {required && <span className="text-blue-400 ml-1">*</span>}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(id, e.target.value)}
-        className="w-full px-4 py-3 bg-white/[0.03] border border-white/8 rounded-xl text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
-      />
-    </div>
-  );
-}
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export function Contact() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
-  const [status, setStatus] = useState<SubmitStatus>("idle");
   const [copied, setCopied] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = useCallback((id: keyof FormState, val: string) => {
-    setForm((prev) => ({ ...prev, [id]: val }));
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-
+  const handleCopyEmail = async () => {
     try {
-      await new Promise((res) => setTimeout(res, 600));
-
-      const subject = encodeURIComponent(form.subject || `Inquiry from ${form.name}`);
-      const body = encodeURIComponent(
-        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-      );
-
-      // Open mail client directly
-      window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
-      setStatus("success");
+      await navigator.clipboard.writeText(socialLinks.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
     } catch {
-      setStatus("error");
+      // Fallback
     }
   };
 
-  const canSubmit = form.name && form.email && form.message && status !== "loading";
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) return;
+
+    const encodedSubject = encodeURIComponent(
+      form.subject ? `[Portfolio Inquiry] ${form.subject}` : `Inquiry from ${form.name}`
+    );
+    const encodedBody = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+    );
+
+    // Open user's default email client
+    window.location.href = `mailto:${socialLinks.email}?subject=${encodedSubject}&body=${encodedBody}`;
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 5000);
+  };
 
   return (
     <section id="contact" className="py-24 lg:py-32 relative" aria-label="Contact section">
@@ -92,137 +71,207 @@ export function Contact() {
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-14"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeUp}
+          className="mb-14 text-center max-w-2xl mx-auto"
         >
-          <p className="text-xs font-mono tracking-widest text-blue-400 uppercase mb-2">05 — Connect</p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-            Let&apos;s Build Something Great Together
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.03] border border-white/8 text-[11px] font-mono text-blue-400 uppercase tracking-widest mb-3">
+            06 / Let&apos;s Connect
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+            Start a Conversation
           </h2>
-          <p className="mt-3 text-slate-400 text-base max-w-xl">
-            Open for product leads, UI/UX design architecture, AI collaborations, and startup opportunities.
+          <p className="mt-3 text-slate-400 text-base">
+            Open for software engineering opportunities, AI-driven initiatives, startup collaboration, and technical research partnerships.
           </p>
         </motion.div>
 
-        {/* Bento Contact Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* 2-Column Contact Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Info Bento Card (5 cols) */}
+          {/* Direct Channels & Details (5 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-5 bento-card p-7 sm:p-9 rounded-3xl flex flex-col justify-between space-y-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={fadeUp}
+            className="lg:col-span-5 space-y-6"
           >
-            <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                  <MessageSquare size={20} />
+            {/* Primary Direct Contact Card */}
+            <div className="craft-card p-7 rounded-2xl space-y-6">
+              <div>
+                <h3 className="text-lg font-bold text-white tracking-tight">Direct Channels</h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  Reach out directly via email or connect through developer networks.
+                </p>
+              </div>
+
+              {/* Email Address with Copy Button */}
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/8 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                    <Mail size={16} />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[10px] font-mono uppercase text-slate-400">Email Address</div>
+                    <a
+                      href={`mailto:${socialLinks.email}`}
+                      className="text-xs sm:text-sm font-mono text-white hover:text-blue-400 transition-colors truncate block"
+                    >
+                      {socialLinks.email}
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-white text-base">Direct Reach</h3>
-                  <p className="text-xs text-slate-400">Response within 24 hours</p>
+
+                <button
+                  onClick={handleCopyEmail}
+                  className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/8 text-slate-300 hover:text-white transition-all shrink-0 cursor-pointer"
+                  aria-label="Copy email address"
+                  title="Copy email address"
+                >
+                  {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                </button>
+              </div>
+
+              {/* Location & Response Time */}
+              <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/6">
+                  <div className="text-slate-400 text-[10px] uppercase">Location</div>
+                  <div className="text-slate-200 mt-0.5 flex items-center gap-1">
+                    <MapPin size={11} className="text-blue-400" />
+                    <span>{profile.location}</span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/6">
+                  <div className="text-slate-400 text-[10px] uppercase">Availability</div>
+                  <div className="text-emerald-400 mt-0.5 flex items-center gap-1.5 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Actively Open</span>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Email Address</p>
-                <div className="flex items-center gap-2">
-                  <a
-                    href={`mailto:${socialLinks.email}`}
-                    className="text-sm font-semibold text-blue-400 hover:text-blue-300 break-all transition-colors"
-                  >
-                    {socialLinks.email}
-                  </a>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(socialLinks.email);
-                      setCopied(true);
-                      setTimeout(() => setCopied(false), 2000);
-                    }}
-                    title="Copy email to clipboard"
-                    className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/8 text-slate-400 hover:text-white transition-all text-xs flex items-center gap-1"
-                  >
-                    {copied ? <Check size={13} className="text-green-400" /> : <Copy size={13} />}
-                    <span className="text-[10px]">{copied ? "Copied" : "Copy"}</span>
-                  </button>
+              {/* Verified Network Links */}
+              <div className="pt-4 border-t border-white/8">
+                <div className="text-[11px] font-mono uppercase text-slate-400 mb-3">
+                  Developer &amp; Professional Profiles
                 </div>
-              </div>
-
-              <div>
-                <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Social Profiles</p>
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 gap-2.5">
                   <a
                     href={socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-                    aria-label="GitHub"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
                   >
-                    <FaGithub size={16} />
+                    <span className="flex items-center gap-2">
+                      <FaGithub size={15} /> GitHub
+                    </span>
+                    <ExternalLink size={12} className="opacity-50" />
                   </a>
+
                   <a
                     href={socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#0077b5] hover:bg-[#0077b5]/10 transition-all"
-                    aria-label="LinkedIn"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-[#0077b5]/40 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
                   >
-                    <FaLinkedin size={16} />
+                    <span className="flex items-center gap-2">
+                      <FaLinkedin size={15} className="text-[#0077b5]" /> LinkedIn
+                    </span>
+                    <ExternalLink size={12} className="opacity-50" />
                   </a>
+
+                  <a
+                    href={socialLinks.devto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
+                  >
+                    <span className="flex items-center gap-2">
+                      <FaDev size={15} /> Dev.to
+                    </span>
+                    <ExternalLink size={12} className="opacity-50" />
+                  </a>
+
                   <a
                     href={socialLinks.x}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-                    aria-label="X (Twitter)"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
                   >
-                    <FaXTwitter size={15} />
+                    <span className="flex items-center gap-2">
+                      <FaXTwitter size={14} /> X / Twitter
+                    </span>
+                    <ExternalLink size={12} className="opacity-50" />
                   </a>
                 </div>
               </div>
             </div>
-
-            <div className="p-4 bg-blue-500/[0.04] border border-blue-500/12 rounded-2xl text-xs text-slate-300 leading-relaxed">
-              Based in Gombe State, Nigeria — working with teams and clients worldwide.
-            </div>
           </motion.div>
 
-          {/* Right Form Bento Card (7 cols) */}
+          {/* Form Column (7 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 bento-card p-7 sm:p-9 rounded-3xl"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={fadeUp}
+            className="lg:col-span-7"
           >
-            {status === "success" ? (
-              <div className="h-full min-h-[380px] flex flex-col items-center justify-center gap-5 text-center">
-                <CheckCircle size={48} className="text-green-400" />
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Opening Mail App...</h3>
-                  <p className="text-slate-400 text-xs sm:text-sm max-w-xs">
-                    Your message has been pre-formatted and opened in your email app to send to {socialLinks.email}.
-                  </p>
-                </div>
-                <button
-                  onClick={() => { setStatus("idle"); setForm(INITIAL_FORM); }}
-                  className="px-5 py-2 bg-white/[0.05] border border-white/10 text-white text-xs font-semibold rounded-full hover:bg-white/10 transition-colors"
-                >
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate className="space-y-4">
+            <div className="craft-card p-7 sm:p-9 rounded-2xl">
+              <h3 className="text-lg font-bold text-white tracking-tight mb-2">Send a Direct Message</h3>
+              <p className="text-xs text-slate-400 mb-6">
+                Fill in your project or collaboration details and it will prepare a tailored message directly to my inbox.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <InputField label="Name" id="name" value={form.name} onChange={handleChange} required placeholder="Your name" />
-                  <InputField label="Email" id="email" type="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" />
+                  <div className="space-y-1.5">
+                    <label htmlFor="name" className="block text-xs font-mono text-slate-300">
+                      Your Name <span className="text-blue-400">*</span>
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      placeholder="e.g. Amina Bello"
+                      value={form.name}
+                      onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="email" className="block text-xs font-mono text-slate-300">
+                      Your Email <span className="text-blue-400">*</span>
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      placeholder="e.g. amina@example.com"
+                      value={form.email}
+                      onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                    />
+                  </div>
                 </div>
-                <InputField label="Subject" id="subject" value={form.subject} onChange={handleChange} placeholder="Project inquiry, design, or role..." />
+
+                <div className="space-y-1.5">
+                  <label htmlFor="subject" className="block text-xs font-mono text-slate-300">
+                    Subject / Project Context
+                  </label>
+                  <input
+                    id="subject"
+                    type="text"
+                    placeholder="e.g. Software Engineering Opportunity / IoT Collaboration"
+                    value={form.subject}
+                    onChange={(e) => setForm((prev) => ({ ...prev, subject: e.target.value }))}
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                  />
+                </div>
 
                 <div className="space-y-1.5">
                   <label htmlFor="message" className="block text-xs font-mono text-slate-300">
@@ -230,44 +279,34 @@ export function Contact() {
                   </label>
                   <textarea
                     id="message"
-                    name="message"
                     required
                     rows={5}
+                    placeholder="Describe your inquiry, project scope, or opportunity..."
                     value={form.message}
-                    onChange={(e) => handleChange("message", e.target.value)}
-                    placeholder="Tell me about your project or idea..."
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/8 rounded-xl text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all resize-none"
+                    onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all resize-y"
                   />
                 </div>
 
-                {status === "error" && (
-                  <div className="flex items-center gap-2 text-red-400 text-xs">
-                    <AlertCircle size={15} />
-                    <span>Something went wrong. Please try emailing directly.</span>
-                  </div>
-                )}
-
                 <button
                   type="submit"
-                  disabled={!canSubmit}
-                  className={cn(
-                    "w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition-all",
-                    canSubmit
-                      ? "bg-blue-600 text-white hover:bg-blue-500 shadow-[0_0_25px_rgba(59,130,246,0.4)] active:scale-[0.98]"
-                      : "bg-white/[0.04] text-slate-600 cursor-not-allowed"
-                  )}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.45)] cursor-pointer"
                 >
-                  {status === "loading" ? (
-                    <><Loader2 size={15} className="animate-spin" /> Preparing Mail...</>
-                  ) : (
-                    <><Send size={15} /> Send Message</>
-                  )}
+                  <Send size={15} />
+                  <span>Send Message via Email</span>
                 </button>
+
+                {submitted && (
+                  <p className="text-xs font-mono text-emerald-400 pt-2 flex items-center gap-1.5">
+                    <Check size={14} /> Mail client opened! If your client didn&apos;t open, copy the email directly.
+                  </p>
+                )}
               </form>
-            )}
+            </div>
           </motion.div>
 
         </div>
+
       </div>
     </section>
   );

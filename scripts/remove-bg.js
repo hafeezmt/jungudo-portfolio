@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Script to replace white background in profile photo with black
 const sharp = require('sharp');
 

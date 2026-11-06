@@ -1,243 +1,256 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Download, MapPin, Sparkles, Code, Cpu, Layout, Award } from "lucide-react";
+import {
+  ArrowRight,
+  MapPin,
+  Download,
+  Code2,
+  Cpu,
+} from "lucide-react";
+import { FaGithub, FaLinkedin, FaDev } from "react-icons/fa6";
 import { profile } from "@/data/profile";
+import { socialLinks } from "@/data/social";
 
-const CYCLING_TITLES = [
-  "UI/UX Lead @ PropaBridge",
-  "Founder & Lead @ WizzyAI",
-  "Co-Founder @ AgriSense IoT",
-  "B.Sc. Computer Science & Stats",
-];
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1 },
+  }),
+};
 
 export function Hero() {
-  const [titleIndex, setTitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTitleIndex((prev) => (prev + 1) % CYCLING_TITLES.length);
-    }, 3200);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section
       id="home"
-      className="relative min-h-[100vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
+      className="relative min-h-[92vh] flex items-center justify-center pt-32 pb-20 overflow-hidden"
       aria-label="Hero section"
     >
-      {/* ── Background Glows & Grid ── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-blue-600/12 via-purple-600/8 to-cyan-400/10 rounded-full blur-[160px]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+      {/* Subtle atmospheric ambient glow */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[480px] bg-gradient-to-b from-blue-600/10 via-indigo-600/5 to-transparent rounded-full blur-[140px]" />
+        <div className="absolute inset-0 tech-grid-pattern opacity-30" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* ─────────── LEFT COLUMN: Main Spotlight (7 cols) ─────────── */}
-          <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
-
-            {/* Top Pill Badge */}
+          {/* ─────────── LEFT COLUMN: Brand Statement & CTA (7 cols) ─────────── */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            
+            {/* Monospace Identifier & Status Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-xs font-mono text-blue-400"
+              custom={0}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
             >
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={CYCLING_TITLES[titleIndex]}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3 }}
-                  className="font-semibold text-white/90"
-                >
-                  {CYCLING_TITLES[titleIndex]}
-                </motion.span>
-              </AnimatePresence>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/[0.04] border border-white/8 text-[11px] font-mono uppercase tracking-wider text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                Jungudo Muhammad Tukur
+              </span>
+
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span>{profile.availabilityText}</span>
+              </div>
             </motion.div>
 
-            {/* Main Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-white">
-                Designing &amp; Building{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400">
-                  Human-Centred Digital Products.
+            {/* Headline */}
+            <motion.div custom={1} initial="hidden" animate="visible" variants={fadeUp}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] max-w-2xl">
+                Building Technology That Solves{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-violet-400">
+                  Real-World Problems.
                 </span>
               </h1>
             </motion.div>
 
-            {/* Short Subhead / Bio */}
+            {/* Supporting Description */}
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mx-auto lg:mx-0"
+              custom={2}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
             >
-              {profile.bio}
+              {profile.description}
             </motion.p>
 
-            {/* Location & Status Pill */}
+            {/* Location & Roles Strip */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.28 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-mono text-slate-400"
+              custom={3}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs font-mono text-slate-400"
             >
-              <span className="flex items-center gap-1.5 px-3 py-1 bg-white/[0.02] border border-white/6 rounded-lg">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/8">
                 <MapPin size={13} className="text-blue-400" />
-                {profile.location}
+                <span>{profile.location}</span>
               </span>
-              <span className="flex items-center gap-1.5 px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Available for Product &amp; Design Roles
-              </span>
+
+              <div className="hidden sm:flex items-center gap-1.5">
+                {profile.roles.slice(0, 3).map((role) => (
+                  <span
+                    key={role}
+                    className="px-2.5 py-1 rounded-lg bg-white/[0.02] border border-white/6 text-slate-400 text-[11px]"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
             </motion.div>
 
-            {/* CTAs */}
+            {/* Primary & Secondary CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2"
+              custom={4}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
             >
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(59,130,246,0.4)]"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all shadow-[0_0_24px_rgba(59,130,246,0.35)] hover:shadow-[0_0_32px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Sparkles size={15} />
-                Explore Projects
-                <ArrowRight size={15} />
+                <span>Explore My Work</span>
+                <ArrowRight size={16} />
               </Link>
 
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/[0.04] border border-white/10 text-white text-sm font-medium rounded-xl hover:bg-white/8 hover:border-white/20 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-white text-sm font-medium transition-all hover:-translate-y-0.5 active:translate-y-0"
               >
-                Let&apos;s Connect
+                <span>Let&apos;s Connect</span>
               </Link>
 
               {profile.cvAvailable && (
                 <a
                   href={profile.cv}
                   download
-                  className="inline-flex items-center gap-2 px-5 py-3.5 text-slate-400 text-sm font-medium hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-3.5 text-slate-400 hover:text-white text-sm font-medium transition-colors"
                 >
-                  <Download size={14} />
-                  Download CV
+                  <Download size={15} />
+                  <span>CV</span>
                 </a>
               )}
             </motion.div>
 
-            {/* Quick Skills Pills */}
+            {/* Social Proof Channels */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-2"
+              custom={5}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="flex items-center justify-center lg:justify-start gap-4 pt-2 text-slate-400 text-xs font-mono"
             >
-              {profile.roles.map((role) => (
-                <span
-                  key={role}
-                  className="px-3 py-1 text-[11px] font-medium text-slate-400 bg-white/[0.02] border border-white/6 rounded-lg"
+              <span className="text-slate-500 text-[11px] uppercase tracking-wider">Connect:</span>
+              <div className="flex items-center gap-2.5">
+                <a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-white/[0.03] border border-white/8 text-slate-300 hover:text-white hover:bg-white/[0.08] hover:border-blue-500/40 transition-all"
+                  aria-label="GitHub Profile"
                 >
-                  {role}
-                </span>
-              ))}
+                  <FaGithub size={15} />
+                </a>
+                <a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-white/[0.03] border border-white/8 text-slate-300 hover:text-[#0077b5] hover:bg-white/[0.08] hover:border-[#0077b5]/40 transition-all"
+                  aria-label="LinkedIn Profile"
+                >
+                  <FaLinkedin size={15} />
+                </a>
+                <a
+                  href={socialLinks.devto}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-white/[0.03] border border-white/8 text-slate-300 hover:text-white hover:bg-white/[0.08] hover:border-white/30 transition-all"
+                  aria-label="Dev.to Articles"
+                >
+                  <FaDev size={15} />
+                </a>
+              </div>
             </motion.div>
 
           </div>
 
-          {/* ─────────── RIGHT COLUMN: Bento Portrait & Metric Cards (5 cols) ─────────── */}
-          <div className="lg:col-span-5 flex flex-col items-center gap-5">
+          {/* ─────────── RIGHT COLUMN: Architectural Portrait & Tech Telemetry (5 cols) ─────────── */}
+          <div className="lg:col-span-5 flex flex-col items-center">
             
-            {/* Bento Portrait Card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="relative w-full max-w-[340px] sm:max-w-[380px]"
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="w-full max-w-[360px] sm:max-w-[400px] space-y-4"
             >
-              {/* Outer Glow & Animated Ring */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 via-purple-600/20 to-cyan-400/20 rounded-[2rem] blur-2xl opacity-70 animate-pulse" />
-              <div className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-cyan-400/40 blur-sm opacity-50" />
-
-              {/* Card Container */}
-              <div className="relative bento-card p-4 rounded-[2rem] overflow-hidden border border-white/10 bg-[#0d0d15]/90">
-                {/* Photo Frame */}
-                <div className="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden border border-white/10 bg-[#07070b]">
+              {/* Portrait Frame */}
+              <div className="relative craft-card rounded-2xl p-3 overflow-hidden shadow-2xl">
+                {/* Visual Corner Accents */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-blue-500/10 rounded-bl-full pointer-events-none" />
+                
+                <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-[#090a0f] border border-white/10">
                   <Image
                     src={profile.profileImage}
-                    alt={`${profile.name} — Profile Photo`}
+                    alt={`${profile.name} — Software Developer & Technology Innovator`}
                     fill
-                    className="object-cover object-top scale-105"
                     priority
-                    sizes="(max-width: 640px) 340px, 380px"
+                    className="object-cover object-top filter brightness-[0.98] contrast-[1.02]"
+                    sizes="(max-width: 640px) 340px, 400px"
                   />
-                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0d0d15] via-[#0d0d15]/40 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0b0c12] via-[#0b0c12]/60 to-transparent" />
+                  
+                  {/* Subtle telemetry overlay */}
+                  <div className="absolute bottom-3 inset-x-3 p-3 rounded-lg bg-[#0c0d14]/85 border border-white/10 backdrop-blur-md">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                        <span className="text-[11px] font-mono text-slate-300 font-medium">Systems Active</span>
+                      </div>
+                      <span className="text-[10px] font-mono text-blue-400">Nigeria</span>
+                    </div>
+                    <p className="text-xs font-semibold text-white mt-1">
+                      AgriSense IoT • ListingWriter • PropaBridge
+                    </p>
+                  </div>
                 </div>
+              </div>
 
-                {/* Overlaid Floating Bento Chips */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-6 left-6 right-6 p-3 bg-[#0d0d16]/90 border border-white/10 rounded-xl backdrop-blur-md shadow-2xl flex items-center justify-between"
-                >
+              {/* Engineered Micro-Metrics Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="craft-card p-3.5 rounded-xl flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                    <Code2 size={16} />
+                  </div>
                   <div>
-                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">Current Focus</p>
-                    <p className="text-xs font-bold text-white mt-0.5">WizzyAI &amp; PropaBridge</p>
+                    <div className="text-xs font-bold text-white">Fullstack &amp; AI</div>
+                    <div className="text-[10px] font-mono text-slate-400">TypeScript / Next / LLMs</div>
                   </div>
-                  <div className="w-7 h-7 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                    <Sparkles size={14} />
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Bento Quick Metrics */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="grid grid-cols-2 gap-3 w-full max-w-[340px] sm:max-w-[380px]"
-            >
-              <div className="bento-card p-4 rounded-2xl bg-white/[0.02] border border-white/6 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-blue-400 shrink-0">
-                  <Layout size={18} />
                 </div>
-                <div>
-                  <p className="text-base font-extrabold text-white">4+ Products</p>
-                  <p className="text-[10px] text-slate-400 font-mono">Designed &amp; Built</p>
+
+                <div className="craft-card p-3.5 rounded-xl flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 shrink-0">
+                    <Cpu size={16} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-white">Offline-First IoT</div>
+                    <div className="text-[10px] font-mono text-slate-400">iHatch Cohort 5</div>
+                  </div>
                 </div>
               </div>
 
-              <div className="bento-card p-4 rounded-2xl bg-white/[0.02] border border-white/6 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-400 shrink-0">
-                  <Award size={18} />
-                </div>
-                <div>
-                  <p className="text-base font-extrabold text-white">iHatch Cohort 5</p>
-                  <p className="text-[10px] text-slate-400 font-mono">AgriSense Accelerator</p>
-                </div>
-              </div>
             </motion.div>
 
           </div>

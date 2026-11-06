@@ -1,22 +1,28 @@
-# Jungudo Muhammad Tukur — Personal Portfolio
+# Jungudo Muhammad Tukur — Developer Portfolio
 
-> **UI/UX Designer · Product Manager · Tech Entrepreneur · Computer Science & Statistics Student**
-> Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Framer Motion.
+> **Software Developer · AI Enthusiast · Technology Innovator · Computer Science Student · Startup Builder**  
+> Building technology that solves real-world problems in Africa. Built with Next.js 16 (Turbopack, App Router), TypeScript, Tailwind CSS v4, and Framer Motion.
 
 ---
 
-## ⚡ Features & Enhancements
+## ⚡ Architecture & Highlights
 
-- 🍱 **Bento-Grid Architecture**: Modern dark onyx theme (`#070709`) with glowing electric-blue/cyan accents and glassmorphic bento cards.
-- ⚡ **Next.js 16 App Router**: Server and client component optimization with static page pre-rendering.
-- 🌀 **Framer Motion Micro-Interactions**: Smooth spring physics, cycling titles, animated halo rings, and prefers-reduced-motion support.
-- 🔍 **SEO & JSON-LD Structured Data**: Full Person & Organization schema integration for Google search indexing.
-- 📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop viewports.
-- 📂 **Data-Driven Layer**: Content decoupled from UI components in `src/data/`.
-- 🗂️ **Filterable Bento Projects Showcase**: Visual previews for **Tilawa Daily**, **WizzyAI**, **PropaBridge**, and **AgriSense IoT**.
-- 📄 **Downloadable CV**: Generated PDF version integrated directly in the Hero section.
-- 🔝 **ScrollToTop Navigation**: Quick floating return-to-top button.
-- 📬 **Interactive Contact Flow**: Form with instant mailto pre-filling and quick copy-to-clipboard email action.
+- **Refined Dark-First Aesthetics**: Precision charcoal and deep onyx theme (`#070709`) with electric-blue accents, subtle ambient lighting, and bespoke `.craft-card` engineering containers.
+- **Hero Spotlight Experience**: Clear positioning, location indicator (Gombe State, Nigeria), real-time availability indicator, profile portrait with telemetry, and dual primary/secondary action triggers.
+- **Featured Projects Showcase**: Distinctive layout variants for flagship initiatives, open-source repositories, and hardware telemetry:
+  - **AgriSense IoT**: Offline-first livestock environmental monitoring (Selected for **iHatch Cohort 5**).
+  - **ListingWriter**: Open-source AI property marketing assistant for Nigerian agents ([GitHub Repository](https://github.com/hafeezmt/listingwriter)).
+  - **WizzyAI**: AI-powered conversational learning companion concept for African children.
+  - **PropaBridge**: Real-estate verification platform digitizing Nigeria's property sector ([propabridge.com](https://propabridge.com)).
+  - **NomaVault AI**: Solar-powered multi-sensor grain storage preservation telemetry.
+  - **Tilawa Daily**: Real-time WebRTC audio rooms and 5-Hizb Quran reading platform ([tilawa-daily.vercel.app](https://tilawa-daily.vercel.app)).
+- **Technical Stack Matrix**: Cleanly organized into Frontend Development, Developer Tools & Environment, and AI & Emerging Technologies with verified proficiency badges (*Advanced*, *Proficient*, *Familiar / Practical R&D*).
+- **Experience & Leadership Timeline**: Chronological track record covering startup co-founding (AgriSense IoT, WizzyAI), technical presentations (**BUILD26**), hackathons (**Global MedTech Hackathon**), and developer community engagement (**Google Developer Groups**).
+- **Achievements & Recognition**: Dedicated milestones grid showcasing accelerator selections, technical presentations, open-source releases, and academic excellence.
+- **Academic Foundations**: Dual-discipline rigor combining B.Sc. in Computer Science at University of the People with B.Sc. in Statistics at Gombe State University.
+- **Premium Contact Experience**: Interactive validated message form, one-click copy email action with visual feedback, and direct verified developer channel links.
+- **SEO & Structured Data**: Built-in JSON-LD Person schema and OpenGraph metadata.
+- **Performance & Accessibility**: Respects `prefers-reduced-motion` and builds cleanly with static page pre-rendering.
 
 ---
 
@@ -24,12 +30,12 @@
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 16 (App Router) |
+| Framework | Next.js 16 (Turbopack, App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
 | Motion | Framer Motion |
 | Icons | Lucide React + React Icons |
-| SEO | JSON-LD Schema + Next Metadata |
+| SEO | JSON-LD Schema + Next.js Metadata API |
 | Deployment | Vercel |
 
 ---
@@ -40,40 +46,39 @@
 jungudo-portfolio/
 ├── public/
 │   ├── documents/
-│   │   └── Jungudo-Muhammad-Tukur-CV.pdf   ← Generated CV PDF
+│   │   └── Jungudo-Muhammad-Tukur-CV.pdf   ← Downloadable CV PDF
 │   ├── images/
 │   │   ├── profile/                        ← Profile headshot
-│   │   └── projects/                       ← Project screenshots (Tilawa Daily, etc.)
+│   │   └── projects/                       ← Project previews (Tilawa Daily, etc.)
 ├── src/
 │   ├── app/
-│   │   ├── globals.css                     ← Bento dark tokens & utility classes
-│   │   ├── layout.tsx                      ← JSON-LD schema & Metadata
+│   │   ├── globals.css                     ← Clean design tokens & utility classes
+│   │   ├── layout.tsx                      ← JSON-LD schema & Next.js metadata
 │   │   ├── page.tsx                        ← Main page assembly
 │   │   ├── loading.tsx
 │   │   └── not-found.tsx
 │   ├── components/
-│   │   ├── Navbar.tsx                      ← Glassmorphic floating pill navigation
-│   │   ├── Hero.tsx                        ← Bento Spotlight Hero & cycling title
-│   │   ├── About.tsx                       ← Bio, Education (UoPeople & GSU), Achievements
-│   │   ├── Skills.tsx                      ← Capabilities bento matrix with category counts
-│   │   ├── Projects.tsx                    ← Filterable project showcase with thumbnails
-│   │   ├── Experience.tsx                  ← Executive experience cards (PropaBridge, WizzyAI, etc.)
-│   │   ├── BuildingInPublic.tsx            ← Active R&D domains & impact chain
-│   │   ├── Contact.tsx                     ← Contact form & copy-to-clipboard email action
-│   │   ├── ScrollToTop.tsx                 ← Floating return to top button
-│   │   ├── FloatingBubbles.tsx             ← Background ambient canvas particles
-│   │   └── Footer.tsx
+│   │   ├── Navbar.tsx                      ← Navigation bar with active section indicator
+│   │   ├── Hero.tsx                        ← Spotlight hero with real-time telemetry
+│   │   ├── About.tsx                       ← Bio, principles, and academic foundations
+│   │   ├── Projects.tsx                    ← Filterable project showcase with varied layouts
+│   │   ├── Skills.tsx                      ← Categorized technical skills with proficiency tags
+│   │   ├── Experience.tsx                  ← Experience, leadership, and venture timeline
+│   │   ├── Achievements.tsx                ← Accelerator, hackathon, and open-source milestones
+│   │   ├── Contact.tsx                     ← Direct contact form & one-click email copy
+│   │   ├── ScrollToTop.tsx                 ← Smooth return-to-top button
+│   │   └── Footer.tsx                      ← Minimal footer with verified social links
 │   ├── data/
-│   │   ├── profile.ts                      ← Bio & journey details
-│   │   ├── projects.ts                     ← Project details & links
-│   │   ├── skills.ts                       ← Capabilities dataset
-│   │   ├── experience.ts                   ← Work experience dataset
-│   │   ├── education.ts                    ← Degrees & coursework
-│   │   ├── achievements.ts                 ← Accelerator & project milestones
-│   │   └── social.ts                       ← Contact & social links
+│   │   ├── profile.ts                      ← Brand, bio, principles, and statistics
+│   │   ├── projects.ts                     ← Project details, architecture, and repositories
+│   │   ├── skills.ts                       ← Categorized technical skills dataset
+│   │   ├── experience.ts                   ← Verified timeline and milestones
+│   │   ├── achievements.ts                 ← Key recognition and accelerator records
+│   │   ├── education.ts                    ← Academic institutions and coursework
+│   │   └── social.ts                       ← Social channels and verified URLs
 │   └── lib/
-│       ├── siteConfig.ts                   ← Global site metadata helper
-│       └── utils.ts                        ← Tailwind helper
+│       ├── siteConfig.ts                   ← Global site configuration
+│       └── utils.ts                        ← Utility helpers
 ```
 
 ---
@@ -105,7 +110,8 @@ npm run build
 - Email: [jungudo.muhammad@gmail.com](mailto:jungudo.muhammad@gmail.com)
 - GitHub: [@hafeezmt](https://github.com/hafeezmt)
 - LinkedIn: [jungudo-tukur](https://www.linkedin.com/in/jungudo-tukur)
-- Twitter/X: [@Jungudotukur](https://x.com/Jungudotukur)
+- Dev.to: [@hafeezmt](https://dev.to/hafeezmt)
+- X (Twitter): [@Jungudotukur](https://x.com/Jungudotukur)
 
 ---
 
