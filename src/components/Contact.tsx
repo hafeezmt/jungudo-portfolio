@@ -30,7 +30,7 @@ const INITIAL_FORM: FormState = {
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
 export function Contact() {
@@ -59,7 +59,6 @@ export function Contact() {
       `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
     );
 
-    // Open user's default email client
     window.location.href = `mailto:${socialLinks.email}?subject=${encodedSubject}&body=${encodedBody}`;
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
@@ -77,21 +76,21 @@ export function Contact() {
           variants={fadeUp}
           className="mb-14 text-center max-w-2xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.03] border border-white/8 text-[11px] font-mono text-blue-400 uppercase tracking-widest mb-3">
-            06 / Let&apos;s Connect
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.03] border border-white/[0.08] text-[11px] font-mono text-blue-400 uppercase tracking-widest mb-3">
+            06 // Initiate Contact
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-            Start a Conversation
+            Let&apos;s Build Together
           </h2>
-          <p className="mt-3 text-slate-400 text-base">
-            Open for software engineering opportunities, AI-driven initiatives, startup collaboration, and technical research partnerships.
+          <p className="mt-3 text-zinc-400 text-base">
+            Open for software engineering roles, applied AI initiatives, startup collaboration, and technical research partnerships.
           </p>
         </motion.div>
 
         {/* 2-Column Contact Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Direct Channels & Details (5 cols) */}
+          {/* Direct Channels (5 cols) */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -99,23 +98,22 @@ export function Contact() {
             variants={fadeUp}
             className="lg:col-span-5 space-y-6"
           >
-            {/* Primary Direct Contact Card */}
-            <div className="craft-card p-7 rounded-2xl space-y-6">
+            <div className="studio-surface p-7 rounded-2xl space-y-6">
               <div>
                 <h3 className="text-lg font-bold text-white tracking-tight">Direct Channels</h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  Reach out directly via email or connect through developer networks.
+                <p className="text-xs text-zinc-400 mt-1">
+                  Reach out directly via email or connect through verified developer profiles.
                 </p>
               </div>
 
               {/* Email Address with Copy Button */}
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/8 flex items-center justify-between gap-3">
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 overflow-hidden">
                   <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
                     <Mail size={16} />
                   </div>
                   <div className="truncate">
-                    <div className="text-[10px] font-mono uppercase text-slate-400">Email Address</div>
+                    <div className="text-[10px] font-mono uppercase text-zinc-500">Email Address</div>
                     <a
                       href={`mailto:${socialLinks.email}`}
                       className="text-xs sm:text-sm font-mono text-white hover:text-blue-400 transition-colors truncate block"
@@ -127,7 +125,7 @@ export function Contact() {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/8 text-slate-300 hover:text-white transition-all shrink-0 cursor-pointer"
+                  className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-zinc-300 hover:text-white transition-all shrink-0 cursor-pointer"
                   aria-label="Copy email address"
                   title="Copy email address"
                 >
@@ -137,16 +135,16 @@ export function Contact() {
 
               {/* Location & Response Time */}
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/6">
-                  <div className="text-slate-400 text-[10px] uppercase">Location</div>
-                  <div className="text-slate-200 mt-0.5 flex items-center gap-1">
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-zinc-500 text-[10px] uppercase">Location</div>
+                  <div className="text-zinc-200 mt-0.5 flex items-center gap-1">
                     <MapPin size={11} className="text-blue-400" />
                     <span>{profile.location}</span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/6">
-                  <div className="text-slate-400 text-[10px] uppercase">Availability</div>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-zinc-500 text-[10px] uppercase">Availability</div>
                   <div className="text-emerald-400 mt-0.5 flex items-center gap-1.5 font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>Actively Open</span>
@@ -154,9 +152,9 @@ export function Contact() {
                 </div>
               </div>
 
-              {/* Verified Network Links */}
-              <div className="pt-4 border-t border-white/8">
-                <div className="text-[11px] font-mono uppercase text-slate-400 mb-3">
+              {/* Verified Network Profiles */}
+              <div className="pt-4 border-t border-white/[0.06]">
+                <div className="text-[11px] font-mono uppercase text-zinc-500 mb-3">
                   Developer &amp; Professional Profiles
                 </div>
                 <div className="grid grid-cols-2 gap-2.5">
@@ -164,48 +162,48 @@ export function Contact() {
                     href={socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.05] hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-zinc-300 hover:text-white"
                   >
                     <span className="flex items-center gap-2">
-                      <FaGithub size={15} /> GitHub
+                      <FaGithub size={14} /> GitHub
                     </span>
-                    <ExternalLink size={12} className="opacity-50" />
+                    <ExternalLink size={11} className="opacity-50" />
                   </a>
 
                   <a
                     href={socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-[#0077b5]/40 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.05] hover:border-[#0077b5]/40 transition-all flex items-center justify-between text-xs font-medium text-zinc-300 hover:text-white"
                   >
                     <span className="flex items-center gap-2">
-                      <FaLinkedin size={15} className="text-[#0077b5]" /> LinkedIn
+                      <FaLinkedin size={14} className="text-[#0077b5]" /> LinkedIn
                     </span>
-                    <ExternalLink size={12} className="opacity-50" />
+                    <ExternalLink size={11} className="opacity-50" />
                   </a>
 
                   <a
                     href={socialLinks.devto}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.05] hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-zinc-300 hover:text-white"
                   >
                     <span className="flex items-center gap-2">
-                      <FaDev size={15} /> Dev.to
+                      <FaDev size={14} /> Dev.to
                     </span>
-                    <ExternalLink size={12} className="opacity-50" />
+                    <ExternalLink size={11} className="opacity-50" />
                   </a>
 
                   <a
                     href={socialLinks.x}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/6 hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-slate-300 hover:text-white"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.05] hover:border-white/20 transition-all flex items-center justify-between text-xs font-medium text-zinc-300 hover:text-white"
                   >
                     <span className="flex items-center gap-2">
-                      <FaXTwitter size={14} /> X / Twitter
+                      <FaXTwitter size={13} /> X / Twitter
                     </span>
-                    <ExternalLink size={12} className="opacity-50" />
+                    <ExternalLink size={11} className="opacity-50" />
                   </a>
                 </div>
               </div>
@@ -220,16 +218,16 @@ export function Contact() {
             variants={fadeUp}
             className="lg:col-span-7"
           >
-            <div className="craft-card p-7 sm:p-9 rounded-2xl">
-              <h3 className="text-lg font-bold text-white tracking-tight mb-2">Send a Direct Message</h3>
-              <p className="text-xs text-slate-400 mb-6">
-                Fill in your project or collaboration details and it will prepare a tailored message directly to my inbox.
+            <div className="studio-surface p-7 sm:p-9 rounded-2xl">
+              <h3 className="text-lg font-bold text-white tracking-tight mb-1">Direct Message Form</h3>
+              <p className="text-xs text-zinc-400 mb-6">
+                Fill in your project scope or collaboration inquiry. Dispatches directly to my primary inbox.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label htmlFor="name" className="block text-xs font-mono text-slate-300">
+                    <label htmlFor="name" className="block text-xs font-mono text-zinc-300">
                       Your Name <span className="text-blue-400">*</span>
                     </label>
                     <input
@@ -239,12 +237,12 @@ export function Contact() {
                       placeholder="e.g. Amina Bello"
                       value={form.name}
                       onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-zinc-950/70 border border-white/[0.08] focus:border-blue-500/60 focus:bg-zinc-950 text-white text-xs sm:text-sm placeholder:text-zinc-600 focus:outline-none transition-all"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="email" className="block text-xs font-mono text-slate-300">
+                    <label htmlFor="email" className="block text-xs font-mono text-zinc-300">
                       Your Email <span className="text-blue-400">*</span>
                     </label>
                     <input
@@ -254,27 +252,27 @@ export function Contact() {
                       placeholder="e.g. amina@example.com"
                       value={form.email}
                       onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-zinc-950/70 border border-white/[0.08] focus:border-blue-500/60 focus:bg-zinc-950 text-white text-xs sm:text-sm placeholder:text-zinc-600 focus:outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="subject" className="block text-xs font-mono text-slate-300">
+                  <label htmlFor="subject" className="block text-xs font-mono text-zinc-300">
                     Subject / Project Context
                   </label>
                   <input
                     id="subject"
                     type="text"
-                    placeholder="e.g. Software Engineering Opportunity / IoT Collaboration"
+                    placeholder="e.g. Software Engineering Role / AgriSense Collaboration"
                     value={form.subject}
                     onChange={(e) => setForm((prev) => ({ ...prev, subject: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-zinc-950/70 border border-white/[0.08] focus:border-blue-500/60 focus:bg-zinc-950 text-white text-xs sm:text-sm placeholder:text-zinc-600 focus:outline-none transition-all"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="message" className="block text-xs font-mono text-slate-300">
+                  <label htmlFor="message" className="block text-xs font-mono text-zinc-300">
                     Message <span className="text-blue-400">*</span>
                   </label>
                   <textarea
@@ -284,21 +282,21 @@ export function Contact() {
                     placeholder="Describe your inquiry, project scope, or opportunity..."
                     value={form.message}
                     onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/8 focus:border-blue-500/60 focus:bg-white/[0.04] text-white text-xs sm:text-sm placeholder:text-slate-600 focus:outline-none transition-all resize-y"
+                    className="w-full px-4 py-3 rounded-xl bg-zinc-950/70 border border-white/[0.08] focus:border-blue-500/60 focus:bg-zinc-950 text-white text-xs sm:text-sm placeholder:text-zinc-600 focus:outline-none transition-all resize-y"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.45)] cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] transition-all cursor-pointer"
                 >
-                  <Send size={15} />
+                  <Send size={14} />
                   <span>Send Message via Email</span>
                 </button>
 
                 {submitted && (
                   <p className="text-xs font-mono text-emerald-400 pt-2 flex items-center gap-1.5">
-                    <Check size={14} /> Mail client opened! If your client didn&apos;t open, copy the email directly.
+                    <Check size={14} /> Email client opened! If your client didn&apos;t open, copy the email directly.
                   </p>
                 )}
               </form>

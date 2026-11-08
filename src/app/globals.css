@@ -1,23 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #070709;
-  --bg-secondary: #0c0d12;
-  --bg-tertiary: #12131a;
-  --bg-card: rgba(18, 19, 26, 0.7);
-  --bg-card-hover: rgba(24, 25, 36, 0.85);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(59, 130, 246, 0.35);
-  --border-glow: rgba(59, 130, 246, 0.18);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --bg-canvas: #050505;
+  --bg-subtle: #09090b;
+  --bg-surface: #0f1015;
+  --bg-surface-elevated: #16171f;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(59, 130, 246, 0.35);
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
   --accent-blue: #3b82f6;
-  --accent-blue-subtle: rgba(59, 130, 246, 0.1);
+  --accent-indigo: #6366f1;
   --accent-violet: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --accent-emerald: #10b981;
 }
 
 * {
@@ -27,19 +24,20 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  background-color: var(--bg-canvas);
 }
 
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-canvas);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
 }
 
-/* Reduced motion for accessibility */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -51,55 +49,74 @@ body {
   }
 }
 
-/* Custom scrollbar */
+/* Custom minimal scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #070709;
+  background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.3);
   color: #ffffff;
 }
 
-/* Accessible focus visible */
+/* Focus accessible ring */
 :focus-visible {
   outline: 2px solid var(--accent-blue);
-  outline-offset: 3px;
+  outline-offset: 2px;
   border-radius: 6px;
 }
 
-/* Architectural Card System - refined and subtle, not excessive */
-.craft-card {
-  background: linear-gradient(180deg, rgba(20, 22, 30, 0.75) 0%, rgba(12, 13, 18, 0.8) 100%);
+/* Studio Engineering Surface System */
+.studio-surface {
+  background: linear-gradient(180deg, rgba(16, 17, 24, 0.75) 0%, rgba(9, 10, 14, 0.85) 100%);
   border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.craft-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 16px 40px -15px rgba(0, 0, 0, 0.7), 0 0 24px -6px rgba(59, 130, 246, 0.12);
+.studio-surface:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-/* Clean hairline divider */
-.hairline {
-  border-color: rgba(255, 255, 255, 0.07);
+.studio-surface-interactive {
+  position: relative;
+  overflow: hidden;
 }
 
-/* Subtle tech grid backdrop */
-.tech-grid-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
+.studio-surface-interactive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Minimalist engineering grid lines */
+.grid-mesh {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Monospace telemetry pill */
+.telemetry-pill {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
