@@ -1,19 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --bg-canvas: #050505;
-  --bg-subtle: #09090b;
-  --bg-surface: #0f1015;
-  --bg-surface-elevated: #16171f;
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-medium: rgba(255, 255, 255, 0.12);
-  --border-accent: rgba(59, 130, 246, 0.35);
-  --text-primary: #f4f4f5;
+  --bg-canvas: #000000;
+  --bg-surface: #0a0a0c;
+  --bg-surface-elevated: #111115;
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-muted: #52525b;
+  --accent-white: #ffffff;
   --accent-blue: #3b82f6;
-  --accent-indigo: #6366f1;
-  --accent-violet: #8b5cf6;
   --accent-emerald: #10b981;
 }
 
@@ -30,11 +27,12 @@ html {
 body {
   background-color: var(--bg-canvas);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
+  letter-spacing: -0.01em;
 }
 
 /* Reduced motion support */
@@ -49,74 +47,57 @@ body {
   }
 }
 
-/* Custom minimal scrollbar */
+/* Minimalist scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 
-/* Focus accessible ring */
+/* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid var(--accent-blue);
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
-  border-radius: 6px;
 }
 
-/* Studio Engineering Surface System */
-.studio-surface {
-  background: linear-gradient(180deg, rgba(16, 17, 24, 0.75) 0%, rgba(9, 10, 14, 0.85) 100%);
-  border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+/* Vercel / Apple Subtle Ambient Lighting */
+.ambient-glow-top {
+  background: radial-gradient(circle 600px at 50% 0%, rgba(255, 255, 255, 0.05), transparent 70%);
 }
 
-.studio-surface:hover {
-  border-color: var(--border-medium);
-  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+.ambient-spotlight {
+  background: radial-gradient(circle 500px at 50% 50%, rgba(59, 130, 246, 0.06), transparent 70%);
 }
 
-.studio-surface-interactive {
-  position: relative;
-  overflow: hidden;
+/* Executive Editorial Border & Surface */
+.exec-surface {
+  background: #08080a;
+  border: 1px solid var(--border-hairline);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.studio-surface-interactive::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
-  pointer-events: none;
+.exec-surface:hover {
+  border-color: var(--border-strong);
 }
 
-/* Minimalist engineering grid lines */
-.grid-mesh {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+.hairline-b {
+  border-bottom: 1px solid var(--border-hairline);
 }
 
-/* Monospace telemetry pill */
-.telemetry-pill {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.hairline-t {
+  border-top: 1px solid var(--border-hairline);
 }
